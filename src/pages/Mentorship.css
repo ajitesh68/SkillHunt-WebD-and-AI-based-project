@@ -1,0 +1,28 @@
+.mentorship-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .mentorship-header {
+    text-align: center;
+    color: #333;
+  }
+  
+  .mentorship-list {
+    margin: 20px 0;
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .mentorship-item {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .mentorship-item:hover {
+    background-color: #f9f9f9;
+  }
+  
