@@ -6,27 +6,62 @@ import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap is loaded
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    if (!email || !password) {
+      setError('Please fill in all fields');
+      return;
+    }
+
     try {
       const response = await axios.post('http://localhost:5000/api/auth/login', {
         email,
         password,
       });
-      alert(response.data.message);
-      navigate('/'); // Redirect on successful login
+
+      if (response.data.success) {
+        alert(response.data.message);
+        navigate('/'); // Redirect on successful login
+      } else {
+        setError(response.data.message || 'Login failed');
+      }
     } catch (error) {
       console.error('Error during login:', error);
-      alert('Login failed');
+      setError('Login failed. Please try again.');
     }
   };
 
+  const handleGoogleLogin = () => {
+    // You can integrate Google OAuth here
+    alert('Continue with Google feature is coming soon!');
+  };
+
   return (
-    <div className="d-flex align-items-center justify-content-center vh-100 bg-light">
-      <div className="card shadow p-4" style={{ width: '350px' }}>
-        <h3 className="text-center mb-4">SkillHunt Login</h3>
+    <div
+      className="d-flex align-items-center justify-content-center vh-100"
+      style={{
+        background: 'linear-gradient(to right, #00c6ff, #0072ff)', // Gradient background
+      }}
+    >
+      <div
+        className="card shadow-lg p-4"
+        style={{
+          width: '350px',
+          borderRadius: '10px',
+          boxShadow: '0px 15px 30px rgba(0, 0, 0, 0.1)',
+        }}
+      >
+        <h3 className="text-center mb-4" style={{ color: '#0072ff' }}>
+          SkillHunt Login
+        </h3>
+
+        {/* Error message display */}
+        {error && <div className="alert alert-danger">{error}</div>}
+
         <form onSubmit={handleLogin}>
           <div className="mb-3">
             <label htmlFor="email" className="form-label">
@@ -42,6 +77,7 @@ const LoginPage = () => {
               required
             />
           </div>
+
           <div className="mb-3">
             <label htmlFor="password" className="form-label">
               Password
@@ -56,18 +92,55 @@ const LoginPage = () => {
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary w-100">
+
+          <button
+            type="submit"
+            className="btn btn-primary w-100"
+            style={{
+              borderRadius: '30px',
+              transition: 'transform 0.2s ease, background-color 0.3s',
+            }}
+            onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
+            onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+          >
             Login
           </button>
         </form>
+
+        {/* Continue with Google Button */}
+        <div className="d-flex justify-content-center mt-4">
+          <button
+            onClick={handleGoogleLogin}
+            className="btn btn-light w-100 shadow-sm"
+            style={{
+              borderRadius: '30px',
+              border: '1px solid #ddd',
+              backgroundColor: '#fff',
+              transition: 'transform 0.2s ease, background-color 0.3s',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '16px',
+            }}
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google.png"
+              alt="Google Logo"
+              style={{ height: '20px', marginRight: '10px' }}
+            />
+            Continue with Google
+          </button>
+        </div>
+
         <div className="text-center mt-3">
-          <a href="#" className="text-decoration-none">
+          <a href="#" className="text-decoration-none" style={{ color: '#0072ff' }}>
             Forgot Password?
           </a>
         </div>
+
         <div className="text-center mt-2">
           <span>Don't have an account? </span>
-          <a href="#" className="text-decoration-none">
+          <a href="#" className="text-decoration-none" style={{ color: '#0072ff' }}>
             Sign up
           </a>
         </div>
@@ -77,4 +150,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-
