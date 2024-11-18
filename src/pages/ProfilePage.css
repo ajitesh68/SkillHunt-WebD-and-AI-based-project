@@ -1,0 +1,81 @@
+.profile-container {
+    font-family: Arial, sans-serif;
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .profile-header {
+    text-align: center;
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .profile-header h1 {
+    margin: 0;
+  }
+  
+  .profile-edit, .profile-other-accounts, .profile-skills, .profile-posts {
+    margin-top: 20px;
+  }
+  
+  .profile-edit form label,
+  .profile-other-accounts form label {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  .profile-edit form input,
+  .profile-other-accounts form input,
+  .profile-edit form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .profile-skills ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .profile-skills li {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .skill-bar {
+    background-color: #eee;
+    width: 70%;
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-left: 10px;
+  }
+  
+  .skill-bar-filled {
+    background-color: #007bff;
+    height: 100%;
+  }
+  
+  .profile-posts ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .profile-posts li {
+    background: #007bff;
+    color: white;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+  }
+  
