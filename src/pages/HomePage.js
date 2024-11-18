@@ -1,12 +1,47 @@
 import React from 'react';
 
 const HomePage = () => {
-  const sectionStyle = {
+  const headerStyle = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '10px 20px',
+    backgroundColor: '#fff',
+    boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.1)',
+    position: 'sticky',
+    top: 0,
+    zIndex: 1000,
+  };
+
+  const logoStyle = {
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+    color: '#007bff',
+    textDecoration: 'none',
+  };
+
+  const buttonStyle = {
+    backgroundColor: '#007bff',
+    color: '#fff',
+    padding: '8px 15px',
+    fontSize: '14px',
+    borderRadius: '5px',
+    border: 'none',
+    cursor: 'pointer',
+  };
+
+  const sectionStyleBase = {
     padding: '50px 20px',
     margin: '20px 0',
-    backgroundColor: '#f8f9fa',
     borderRadius: '10px',
     boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+    color: '#fff',
+  };
+
+  // Unified gradient for all sections
+  const purpleToBlueStyle = {
+    ...sectionStyleBase,
+    background: 'linear-gradient(135deg, #6f42c1, #003366)',  // Purple to Dark Blue gradient
   };
 
   const featureStyle = {
@@ -19,8 +54,8 @@ const HomePage = () => {
   const imageStyle = {
     borderRadius: '10px',
     boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-    maxWidth: '80%',
-    height: 'auto',
+    maxWidth: '30%',
+    height: '30%',
     flex: '1',
     margin: '10px',
   };
@@ -28,7 +63,7 @@ const HomePage = () => {
   const textStyle = {
     flex: '1',
     margin: '10px',
-    fontSize: '1.1rem',
+    fontSize: '2rem',
   };
 
   const sectionTitleStyle = {
@@ -36,18 +71,6 @@ const HomePage = () => {
     marginBottom: '30px',
     fontWeight: '700',
     fontSize: '2.5rem',
-    color: '#333',
-  };
-
-  const buttonStyle = {
-    backgroundColor: '#28a745',
-    color: '#fff',
-    padding: '12px 25px',
-    fontSize: '18px',
-    borderRadius: '5px',
-    border: 'none',
-    cursor: 'pointer',
-    marginTop: '20px',
   };
 
   const faqStyle = {
@@ -63,17 +86,20 @@ const HomePage = () => {
     marginBottom: '20px',
   };
 
-  const faqItemStyle = {
-    marginBottom: '20px',
-    fontSize: '1.1rem',
-  };
-
   return (
     <div>
+      {/* Header with logo and login/signup */}
+      <header style={headerStyle}>
+        <a href="/" style={logoStyle}>
+          SkillHunt
+        </a>
+        <button style={buttonStyle}>Login / Sign Up</button>
+      </header>
+
       {/* Hero Section */}
       <div
         style={{
-          background: 'linear-gradient(45deg, #6f42c1, #007bff)',
+          background: 'linear-gradient(45deg, #6f42c1, #003366)', // Purple to Dark Blue gradient
           color: '#fff',
           padding: '80px 20px',
           textAlign: 'center',
@@ -88,14 +114,10 @@ const HomePage = () => {
       </div>
 
       {/* Section 1: Explore Hackathons */}
-      <div style={sectionStyle}>
+      <div style={purpleToBlueStyle}>
         <h2 style={sectionTitleStyle}>Explore Hackathons</h2>
         <div style={featureStyle}>
-          <img
-            src="/image-1.png"
-            alt="Explore Hackathons"
-            style={imageStyle}
-          />
+          <img src="/image-1.png" alt="Explore Hackathons" style={imageStyle} />
           <div style={textStyle}>
             <p>Find and participate in exciting hackathons happening worldwide.</p>
           </div>
@@ -103,61 +125,38 @@ const HomePage = () => {
       </div>
 
       {/* Section 2: Team Up */}
-      <div style={sectionStyle}>
+      <div style={purpleToBlueStyle}>
         <h2 style={sectionTitleStyle}>Team Up</h2>
         <div style={featureStyle}>
           <div style={textStyle}>
             <p>Connect with talented individuals to form your dream team.</p>
           </div>
-          <img
-            src="/image-2.png"
-            alt="Team Up"
-            style={imageStyle}
-          />
+          <img src="/image-2.png" alt="Team Up" style={imageStyle} />
         </div>
       </div>
 
       {/* Section 3: Showcase Projects */}
-      <div style={sectionStyle}>
+      <div style={purpleToBlueStyle}>
         <h2 style={sectionTitleStyle}>Showcase Projects</h2>
         <div style={featureStyle}>
-          <img
-            src="/image-3.png"
-            alt="Showcase Projects"
-            style={imageStyle}
-          />
+          <img src="/image-3.png" alt="Showcase Projects" style={imageStyle} />
           <div style={textStyle}>
             <p>Display your projects to attract collaborators and gain recognition.</p>
           </div>
         </div>
       </div>
 
-      {/* Join Us Section */}
-      <div style={{ background: 'linear-gradient(45deg, #6f42c1, #007bff)', color: '#fff', padding: '50px 20px' }}>
-        <h2 style={{ ...sectionTitleStyle, color: '#fff' }}>Join Us Today</h2>
-        <p style={{ textAlign: 'center', fontSize: '1.2rem', maxWidth: '600px', margin: '0 auto' }}>
-          Don’t miss the opportunity to be part of something amazing. Start your SkillHunt journey
-          now.
-        </p>
-        <div style={{ textAlign: 'center' }}>
-          <button style={buttonStyle}>Sign Up</button>
-        </div>
-      </div>
-
       {/* FAQ Section */}
       <div style={faqStyle}>
         <h2 style={faqTitleStyle}>Frequently Asked Questions</h2>
-        <div style={faqItemStyle}>
-          <strong>Q1: How can I join a hackathon?</strong>
-          <p>A1: You can explore hackathons in the 'Explore Hackathons' section and register for events that match your interest.</p>
-        </div>
-        <div style={faqItemStyle}>
-          <strong>Q2: How do I form a team?</strong>
-          <p>A2: You can connect with like-minded individuals in the 'Team Up' section and invite them to join your project.</p>
-        </div>
-        <div style={faqItemStyle}>
-          <strong>Q3: Can I showcase my past projects?</strong>
-          <p>A3: Yes, in the 'Showcase Projects' section, you can display your projects to attract collaborators and potential employers.</p>
+        <div style={{ marginBottom: '20px' }}>
+          <strong>Can I use SkillHunt to find teammates for specific Hackathons or project domains?</strong>
+          <p>
+            Absolutely! SkillHunt's Team Up and Explore Hackathons pages allow you to filter and
+            search based on specific criteria such as project domain, required skills, and
+            technologies involved. This makes it easier for you to find teammates who align with
+            your project requirements.
+          </p>
         </div>
       </div>
     </div>
