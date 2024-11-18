@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
   const headerStyle = {
@@ -20,6 +21,7 @@ const HomePage = () => {
     textDecoration: 'none',
   };
 
+  const navigate = useNavigate();
   const buttonStyle = {
     backgroundColor: '#007bff',
     color: '#fff',
@@ -93,7 +95,7 @@ const HomePage = () => {
         <a href="/" style={logoStyle}>
           SkillHunt
         </a>
-        <button style={buttonStyle}>Login / Sign Up</button>
+        <button style={buttonStyle} onClick={() => navigate('/login')}>Login / Sign Up</button>
       </header>
 
       {/* Hero Section */}
