@@ -1,153 +1,165 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-// Import the uploaded images
-import HackathonBanner from './assets/hackathon-banner.png'; // Replace with the correct path to your first image
-import HackathonIcons from './assets/hackathon-icons.png'; // Replace with the correct path to your second image
 
 const HomePage = () => {
+  const sectionStyle = {
+    padding: '50px 20px',
+    margin: '20px 0',
+    backgroundColor: '#f8f9fa',
+    borderRadius: '10px',
+    boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+  };
+
+  const featureStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+  };
+
+  const imageStyle = {
+    borderRadius: '10px',
+    boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+    maxWidth: '80%',
+    height: 'auto',
+    flex: '1',
+    margin: '10px',
+  };
+
+  const textStyle = {
+    flex: '1',
+    margin: '10px',
+    fontSize: '1.1rem',
+  };
+
+  const sectionTitleStyle = {
+    textAlign: 'center',
+    marginBottom: '30px',
+    fontWeight: '700',
+    fontSize: '2.5rem',
+    color: '#333',
+  };
+
+  const buttonStyle = {
+    backgroundColor: '#28a745',
+    color: '#fff',
+    padding: '12px 25px',
+    fontSize: '18px',
+    borderRadius: '5px',
+    border: 'none',
+    cursor: 'pointer',
+    marginTop: '20px',
+  };
+
+  const faqStyle = {
+    backgroundColor: '#6f42c1',
+    color: '#fff',
+    padding: '40px 20px',
+  };
+
+  const faqTitleStyle = {
+    textAlign: 'center',
+    fontSize: '2rem',
+    fontWeight: '700',
+    marginBottom: '20px',
+  };
+
+  const faqItemStyle = {
+    marginBottom: '20px',
+    fontSize: '1.1rem',
+  };
+
   return (
-    <div
-      style={{
-        backgroundColor: '#cce7ff', // Light Blue Background
-        position: 'relative',
-        minHeight: '100vh',
-        paddingBottom: '3rem',
-        fontFamily: "'Roboto', sans-serif",
-      }}
-    >
-      {/* Overlay for better text contrast */}
+    <div>
+      {/* Hero Section */}
       <div
         style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'rgba(255, 255, 255, 0.8)', // Light white overlay for contrast
-          zIndex: -1,
-        }}
-      ></div>
-
-      {/* Header Section */}
-      <header
-        className="header text-center py-5"
-        style={{
-          backgroundImage: `url(${HackathonBanner})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          color: 'white',
-          textShadow: '2px 2px 5px rgba(0, 0, 0, 0.7)',
-          paddingTop: '5rem',
+          background: 'linear-gradient(45deg, #6f42c1, #007bff)',
+          color: '#fff',
+          padding: '80px 20px',
+          textAlign: 'center',
         }}
       >
-        <h1 className="display-4" style={{ fontWeight: 'bold' }}>
-          SkillHunt
-        </h1>
-        <p className="lead" style={{ fontSize: '1.2rem' }}>
-          Find the best hackathons, teams, and events.
+        <h1 style={{ fontSize: '3rem', fontWeight: '900' }}>Welcome to SkillHunt</h1>
+        <p style={{ fontSize: '1.3rem', maxWidth: '600px', margin: '0 auto' }}>
+          Discover hackathons, form teams, and create groundbreaking projects with like-minded
+          individuals.
         </p>
-        <button
-          className="cta-button btn btn-light btn-lg shadow"
-          style={{
-            fontWeight: 'bold',
-            padding: '0.75rem 2rem',
-            borderRadius: '30px',
-            transition: 'background-color 0.3s ease, transform 0.2s ease',
-          }}
-          onMouseEnter={(e) => e.target.style.transform = 'scale(1.1)'}
-          onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
-        >
-          Join Now
-        </button>
-      </header>
+        <button style={buttonStyle}>Get Started</button>
+      </div>
 
-      {/* Features Section */}
-      <section className="features py-5">
-        <div className="container">
-          <h2 className="text-center section-title mb-5" style={{ color: '#0072ff' }}>
-            What We Offer
-          </h2>
-          <div className="row text-center g-4">
-            <div className="col-md-4">
-              <div className="feature shadow-sm rounded p-4" style={{ backgroundColor: '#fff' }}>
-                <img
-                  src={HackathonIcons}
-                  alt="Hackathons Icon"
-                  className="img-fluid mb-3"
-                  style={{ height: '60px' }}
-                />
-                <h3 className="feature-title" style={{ color: '#0072ff', fontWeight: 'bold' }}>
-                  Hackathons
-                </h3>
-                <p>Join exciting hackathons and showcase your skills.</p>
-              </div>
-            </div>
-            <div className="col-md-4">
-              <div className="feature shadow-sm rounded p-4" style={{ backgroundColor: '#fff' }}>
-                <img
-                  src={HackathonIcons}
-                  alt="Teams Icon"
-                  className="img-fluid mb-3"
-                  style={{ height: '60px' }}
-                />
-                <h3 className="feature-title" style={{ color: '#0072ff', fontWeight: 'bold' }}>
-                  Teams
-                </h3>
-                <p>Find teams for your next big project or event.</p>
-              </div>
-            </div>
-            <div className="col-md-4">
-              <div className="feature shadow-sm rounded p-4" style={{ backgroundColor: '#fff' }}>
-                <img
-                  src={HackathonIcons}
-                  alt="Events Icon"
-                  className="img-fluid mb-3"
-                  style={{ height: '60px' }}
-                />
-                <h3 className="feature-title" style={{ color: '#0072ff', fontWeight: 'bold' }}>
-                  Events
-                </h3>
-                <p>Stay updated with the latest tech events happening around you.</p>
-              </div>
-            </div>
+      {/* Section 1: Explore Hackathons */}
+      <div style={sectionStyle}>
+        <h2 style={sectionTitleStyle}>Explore Hackathons</h2>
+        <div style={featureStyle}>
+          <img
+            src="/image-1.png"
+            alt="Explore Hackathons"
+            style={imageStyle}
+          />
+          <div style={textStyle}>
+            <p>Find and participate in exciting hackathons happening worldwide.</p>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Upcoming Events Section */}
-      <section className="events py-5 bg-light">
-        <div className="container">
-          <h2 className="text-center section-title mb-5" style={{ color: '#0072ff' }}>
-            Upcoming Events
-          </h2>
-          <div className="row g-4">
-            <div className="col-md-4">
-              <div className="event-card shadow-sm rounded p-4" style={{ backgroundColor: '#fff' }}>
-                <h3 className="event-title" style={{ color: '#0072ff' }}>Hackathon 2024</h3>
-                <p>Join the biggest coding event of the year!</p>
-              </div>
-            </div>
-            <div className="col-md-4">
-              <div className="event-card shadow-sm rounded p-4" style={{ backgroundColor: '#fff' }}>
-                <h3 className="event-title" style={{ color: '#0072ff' }}>Tech Meetup</h3>
-                <p>Network with industry professionals at this exciting meetup.</p>
-              </div>
-            </div>
-            <div className="col-md-4">
-              <div className="event-card shadow-sm rounded p-4" style={{ backgroundColor: '#fff' }}>
-                <h3 className="event-title" style={{ color: '#0072ff' }}>Startup Pitch Night</h3>
-                <p>Pitch your startup idea to investors.</p>
-              </div>
-            </div>
+      {/* Section 2: Team Up */}
+      <div style={sectionStyle}>
+        <h2 style={sectionTitleStyle}>Team Up</h2>
+        <div style={featureStyle}>
+          <div style={textStyle}>
+            <p>Connect with talented individuals to form your dream team.</p>
+          </div>
+          <img
+            src="/image-2.png"
+            alt="Team Up"
+            style={imageStyle}
+          />
+        </div>
+      </div>
+
+      {/* Section 3: Showcase Projects */}
+      <div style={sectionStyle}>
+        <h2 style={sectionTitleStyle}>Showcase Projects</h2>
+        <div style={featureStyle}>
+          <img
+            src="/image-3.png"
+            alt="Showcase Projects"
+            style={imageStyle}
+          />
+          <div style={textStyle}>
+            <p>Display your projects to attract collaborators and gain recognition.</p>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Footer Section */}
-      <footer className="footer text-center py-4 bg-dark text-white">
-        <p>&copy; 2024 SkillHunt. All rights reserved.</p>
-      </footer>
+      {/* Join Us Section */}
+      <div style={{ background: 'linear-gradient(45deg, #6f42c1, #007bff)', color: '#fff', padding: '50px 20px' }}>
+        <h2 style={{ ...sectionTitleStyle, color: '#fff' }}>Join Us Today</h2>
+        <p style={{ textAlign: 'center', fontSize: '1.2rem', maxWidth: '600px', margin: '0 auto' }}>
+          Don’t miss the opportunity to be part of something amazing. Start your SkillHunt journey
+          now.
+        </p>
+        <div style={{ textAlign: 'center' }}>
+          <button style={buttonStyle}>Sign Up</button>
+        </div>
+      </div>
+
+      {/* FAQ Section */}
+      <div style={faqStyle}>
+        <h2 style={faqTitleStyle}>Frequently Asked Questions</h2>
+        <div style={faqItemStyle}>
+          <strong>Q1: How can I join a hackathon?</strong>
+          <p>A1: You can explore hackathons in the 'Explore Hackathons' section and register for events that match your interest.</p>
+        </div>
+        <div style={faqItemStyle}>
+          <strong>Q2: How do I form a team?</strong>
+          <p>A2: You can connect with like-minded individuals in the 'Team Up' section and invite them to join your project.</p>
+        </div>
+        <div style={faqItemStyle}>
+          <strong>Q3: Can I showcase my past projects?</strong>
+          <p>A3: Yes, in the 'Showcase Projects' section, you can display your projects to attract collaborators and potential employers.</p>
+        </div>
+      </div>
     </div>
   );
 };
