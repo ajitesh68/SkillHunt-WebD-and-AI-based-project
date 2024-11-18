@@ -1,28 +1,169 @@
+/* General Styles */
 .mentorship-container {
-    padding: 20px;
-    font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Header Section */
+.mentorship-header {
+  background-size: cover;
+  background-position: center;
+  padding: 5rem 1rem;
+  color: white;
+  text-align: center;
+  background: linear-gradient(to right, rgba(0, 114, 255, 0.8), rgba(0, 198, 255, 0.8)), 
+    url('./assets/mentoring-banner.png'); /* Corrected the image path */
+}
+
+/* Heading Box */
+.mentorship-header h1 {
+  font-size: 3.5rem; /* Increased size */
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: 700; /* Made the heading bold */
+  color: #003366; /* Darkened the color */
+  display: inline-block; /* Makes the background fit tightly around the text */
+  padding: 0.5rem 1rem; /* Adds padding inside the box */
+  background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow to make the box stand out */
+}
+
+.mentorship-header p {
+  font-size: 1.25rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  color: #333333; /* Darkened the paragraph text color */
+  font-weight: 600; /* Made the paragraph bolder */
+}
+
+/* Mentor List */
+.mentors-section {
+  padding: 2rem 1rem;
+  background-color: #f0f8ff; /* Light blue background for better contrast */
+}
+
+.mentors-section h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #003366; /* Darkened the color for the section heading */
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase; /* Makes the text uppercase */
+}
+
+/* Grid for Mentor Cards */
+.mentors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+/* Individual Mentor Card */
+.mentor-card {
+  background: #fff; /* White background for each card */
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds depth to the cards */
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-left: 8px solid #0072ff; /* Blue accent line on the left */
+}
+
+.mentor-card:hover {
+  transform: translateY(-5px); /* Hover effect for a slight lift */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+/* Mentor Card Title */
+.mentor-card h3 {
+  color: #003366; /* Dark color for the name */
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Skills and Availability */
+.mentor-card p {
+  font-size: 1rem;
+  color: #555; /* Soft gray for less emphasis */
+  margin-bottom: 1rem;
+}
+
+.mentor-card .skills {
+  font-weight: 600;
+  color: #0072ff; /* Blue color for skills */
+}
+
+/* Add Mentor Form */
+.add-mentor-section {
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.add-mentor-section h2 {
+  margin-bottom: 1.5rem;
+  color: #003366; /* Darkened the color for the section heading */
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase; /* Makes the text uppercase */
+}
+
+.mentor-form input {
+  display: block;
+  margin: 0.5rem auto;
+  padding: 0.75rem;
+  width: 80%;
+  max-width: 400px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.mentor-form input:focus {
+  outline: none;
+  border-color: #0072ff;
+  box-shadow: 0 0 6px rgba(0, 114, 255, 0.4);
+}
+
+.mentor-form button {
+  background-color: #0072ff;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.mentor-form button:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+}
+
+/* Loading Section */
+.loading {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.5rem;
+  color: #0072ff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .mentorship-header h1 {
+    font-size: 2rem;
   }
-  
-  .mentorship-header {
-    text-align: center;
-    color: #333;
+
+  .mentorship-header p {
+    font-size: 1rem;
   }
-  
-  .mentorship-list {
-    margin: 20px 0;
-    list-style-type: none;
-    padding: 0;
+
+  .mentor-form input {
+    width: 90%;
   }
-  
-  .mentorship-item {
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    transition: background-color 0.3s ease;
+
+  .mentorship-image-section img.mentorship-chart {
+    width: 90%;
   }
-  
-  .mentorship-item:hover {
-    background-color: #f9f9f9;
-  }
-  
+}
