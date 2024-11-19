@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
+  const navigate = useNavigate();
+
   const headerStyle = {
     display: 'flex',
     justifyContent: 'space-between',
@@ -21,7 +23,6 @@ const HomePage = () => {
     textDecoration: 'none',
   };
 
-  const navigate = useNavigate();
   const buttonStyle = {
     backgroundColor: '#007bff',
     color: '#fff',
@@ -40,10 +41,9 @@ const HomePage = () => {
     color: '#fff',
   };
 
-  // Unified gradient for all sections
   const purpleToBlueStyle = {
     ...sectionStyleBase,
-    background: 'linear-gradient(135deg, #6f42c1, #003366)',  // Purple to Dark Blue gradient
+    background: 'linear-gradient(135deg, #6f42c1, #003366)',
   };
 
   const featureStyle = {
@@ -68,10 +68,11 @@ const HomePage = () => {
     fontSize: '2rem',
   };
 
-  const sectionTitleStyle = {
-    textAlign: 'center',
+  const headingStyle = {
+    fontWeight: '900', // Boldest font weight
+    color: '#000',     // Dark color
     marginBottom: '30px',
-    fontWeight: '700',
+    textAlign: 'center',
     fontSize: '2.5rem',
   };
 
@@ -82,15 +83,16 @@ const HomePage = () => {
   };
 
   const faqTitleStyle = {
+    fontWeight: '900',
     textAlign: 'center',
     fontSize: '2rem',
-    fontWeight: '700',
+    color: '#000', // Darkened color for better visibility
     marginBottom: '20px',
   };
 
   return (
     <div>
-      {/* Header with logo and login/signup */}
+      {/* Header */}
       <header style={headerStyle}>
         <a href="/" style={logoStyle}>
           SkillHunt
@@ -101,23 +103,22 @@ const HomePage = () => {
       {/* Hero Section */}
       <div
         style={{
-          background: 'linear-gradient(45deg, #6f42c1, #003366)', // Purple to Dark Blue gradient
+          background: 'linear-gradient(45deg, #6f42c1, #003366)',
           color: '#fff',
           padding: '80px 20px',
           textAlign: 'center',
         }}
       >
-        <h1 style={{ fontSize: '3rem', fontWeight: '900' }}>Welcome to SkillHunt</h1>
+        <h1 style={{ ...headingStyle, fontSize: '3rem' }}>Welcome to SkillHunt</h1>
         <p style={{ fontSize: '1.3rem', maxWidth: '600px', margin: '0 auto' }}>
-          Discover hackathons, form teams, and create groundbreaking projects with like-minded
-          individuals.
+          Discover hackathons, form teams, and create groundbreaking projects with like-minded individuals.
         </p>
         <button style={buttonStyle}>Get Started</button>
       </div>
 
       {/* Section 1: Explore Hackathons */}
       <div style={purpleToBlueStyle}>
-        <h2 style={sectionTitleStyle}>Explore Hackathons</h2>
+        <h2 style={headingStyle}>Explore Hackathons</h2>
         <div style={featureStyle}>
           <img src="/image-1.png" alt="Explore Hackathons" style={imageStyle} />
           <div style={textStyle}>
@@ -128,7 +129,7 @@ const HomePage = () => {
 
       {/* Section 2: Team Up */}
       <div style={purpleToBlueStyle}>
-        <h2 style={sectionTitleStyle}>Team Up</h2>
+        <h2 style={headingStyle}>Team Up</h2>
         <div style={featureStyle}>
           <div style={textStyle}>
             <p>Connect with talented individuals to form your dream team.</p>
@@ -139,7 +140,7 @@ const HomePage = () => {
 
       {/* Section 3: Showcase Projects */}
       <div style={purpleToBlueStyle}>
-        <h2 style={sectionTitleStyle}>Showcase Projects</h2>
+        <h2 style={headingStyle}>Showcase Projects</h2>
         <div style={featureStyle}>
           <img src="/image-3.png" alt="Showcase Projects" style={imageStyle} />
           <div style={textStyle}>
@@ -154,10 +155,7 @@ const HomePage = () => {
         <div style={{ marginBottom: '20px' }}>
           <strong>Can I use SkillHunt to find teammates for specific Hackathons or project domains?</strong>
           <p>
-            Absolutely! SkillHunt's Team Up and Explore Hackathons pages allow you to filter and
-            search based on specific criteria such as project domain, required skills, and
-            technologies involved. This makes it easier for you to find teammates who align with
-            your project requirements.
+            Absolutely! SkillHunt's Team Up and Explore Hackathons pages allow you to filter and search based on specific criteria such as project domain, required skills, and technologies involved. This makes it easier for you to find teammates who align with your project requirements.
           </p>
         </div>
       </div>
