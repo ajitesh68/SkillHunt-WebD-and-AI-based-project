@@ -140,7 +140,7 @@ const LoginPage = () => {
 
         <div className="text-center mt-2">
           <span>Don't have an account? </span>
-          <a href="#" className="text-decoration-none" style={{ color: '#0072ff' }}>
+          <a href="/signup" className="text-decoration-none" style={{ color: '#0072ff' }}>
             Sign up
           </a>
         </div>

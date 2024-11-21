@@ -1,44 +1,49 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
+/* General Styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
+  color: #333;
 }
 
 h1, h2 {
   color: #333;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
+div {
+  margin: 20px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.not-found {
+  text-align: center;
+  color: red;
+  margin-top: 50px;
+}
+
+/* Navigation Styles */
+.navbar {
+  background-color: #282c34;
+  padding: 10px 20px;
+  color: white;
+  text-align: center;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+/* Form Styles */
 form {
   display: flex;
   flex-direction: column;
@@ -51,6 +56,7 @@ input {
   margin: 5px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
+  font-size: 14px;
 }
 
 button {
@@ -60,18 +66,73 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 16px;
 }
 
 button:hover {
   background-color: #45a049;
 }
 
+/* Section Styles */
+section {
+  margin: 20px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Notification Styles */
+.notifications-container {
+  padding: 20px;
+}
+
+.notifications-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.notifications-list li {
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.read {
+  color: gray;
+  text-decoration: line-through;
+}
+
+.unread {
+  color: black;
+  font-weight: bold;
+}
+
+/* Skill Progress Bar */
+.skill-bar {
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  height: 10px;
+  margin-top: 5px;
+  overflow: hidden;
+}
+
+.skill-bar-filled {
+  background-color: #4CAF50;
+  height: 100%;
+  width: 0;
+  transition: width 0.5s ease;
+}
+
+/* 404 Page Styles */
+.not-found {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.not-found h1 {
+  font-size: 36px;
+}
+
+.not-found p {
+  font-size: 18px;
 }
