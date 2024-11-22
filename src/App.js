@@ -13,13 +13,20 @@ function App() {
   return (
     <Router>
       <Routes>
+        {/* Route for Home Page */}
         <Route path="/" element={<HomePage />} />
+
+        {/* Routes for other pages */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/teams" element={<Teams />} />
         <Route path="/mentorship" element={<Mentorship />} />
         <Route path="/notifications" element={<Notifications />} />
-        <Route path="/profilepage" element={<ProfilePage />} />
+
+        {/* Updated ProfilePage route */}
+        <Route path="/profile" element={<ProfilePage />} />  {/* Changed /profilepage to /profile */}
+
+        {/* 404 - Page Not Found */}
         <Route
           path="*"
           element={

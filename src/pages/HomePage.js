@@ -106,7 +106,12 @@ const HomePage = () => {
         <p style={{ fontSize: '1.5rem', maxWidth: '800px', margin: '0 auto' }}>
           Discover hackathons, form teams, and create groundbreaking projects with like-minded individuals.
         </p>
-        <button style={{ ...buttonStyle, marginTop: '20px' }}>Get Started</button>
+        <button 
+          style={{ ...buttonStyle, marginTop: '20px' }} 
+          onClick={() => navigate('/profile')}
+        >
+          Get Started
+        </button>
       </div>
 
       {/* Section 1: Explore Hackathons */}
