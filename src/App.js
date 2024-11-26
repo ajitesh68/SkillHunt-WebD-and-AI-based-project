@@ -5,7 +5,6 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import Teams from "./pages/Teams";
-import Mentorship from "./pages/Mentorship";
 import Notifications from "./pages/Notifications";
 import ProfilePage from "./pages/ProfilePage";
 import "./App.css";
@@ -31,7 +30,6 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/teams" element={<Teams />} />
-        <Route path="/mentorship" element={<Mentorship />} />
         <Route path="/notifications" element={<Notifications />} />
 
         {/* Updated ProfilePage route */}

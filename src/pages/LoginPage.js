@@ -44,7 +44,11 @@ const LoginPage = () => {
     <div
       className="d-flex align-items-center justify-content-center vh-100"
       style={{
-        background: 'linear-gradient(to right, #00c6ff, #0072ff)', // Gradient background
+        background: 'linear-gradient(135deg, #6a11cb, #2575fc)', // Magical blue-purple gradient
+        minHeight: '100vh',
+        margin: 0,
+        padding: 0,
+        overflow: 'hidden',
       }}
     >
       <div
@@ -53,9 +57,10 @@ const LoginPage = () => {
           width: '350px',
           borderRadius: '10px',
           boxShadow: '0px 15px 30px rgba(0, 0, 0, 0.1)',
+          background: '#fff',
         }}
       >
-        <h3 className="text-center mb-4" style={{ color: '#0072ff' }}>
+        <h3 className="text-center mb-4" style={{ color: '#6a11cb' }}>
           SkillHunt Login
         </h3>
 
@@ -99,9 +104,11 @@ const LoginPage = () => {
             style={{
               borderRadius: '30px',
               transition: 'transform 0.2s ease, background-color 0.3s',
+              backgroundColor: '#6a11cb',
+              borderColor: '#6a11cb',
             }}
-            onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
-            onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+            onMouseEnter={(e) => (e.target.style.transform = 'scale(1.05)')}
+            onMouseLeave={(e) => (e.target.style.transform = 'scale(1)')}
           >
             Login
           </button>
@@ -133,14 +140,14 @@ const LoginPage = () => {
         </div>
 
         <div className="text-center mt-3">
-          <a href="#" className="text-decoration-none" style={{ color: '#0072ff' }}>
+          <a href="#" className="text-decoration-none" style={{ color: '#6a11cb' }}>
             Forgot Password?
           </a>
         </div>
 
         <div className="text-center mt-2">
           <span>Don't have an account? </span>
-          <a href="/signup" className="text-decoration-none" style={{ color: '#0072ff' }}>
+          <a href="/signup" className="text-decoration-none" style={{ color: '#6a11cb' }}>
             Sign up
           </a>
         </div>

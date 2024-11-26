@@ -4,40 +4,53 @@ import { useNavigate } from 'react-router-dom';
 const HomePage = () => {
   const navigate = useNavigate();
 
-  const headerStyle = {
+  const pageStyle = {
+    backgroundColor: '#1a1a2e', // Solid background color
+    minHeight: '100vh',
+    margin: 0,
+    padding: 0,
+    color: '#fff',
+    fontFamily: 'Arial, sans-serif',
+    display: 'flex',
+    flexDirection: 'column',
+  };
+
+  const wrapperStyle = {
+    backgroundColor: '#1a1a2e',
+    minHeight: '100vh',
+    margin: 0,
+    padding: 0,
+    overflowX: 'hidden', // Prevent horizontal scroll
+  };
+
+  const navbarStyle = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '10px 20px',
-    backgroundColor: '#fff',
-    boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.1)',
+    padding: '15px 20px',
+    backgroundColor: '#16213e',
     position: 'sticky',
     top: 0,
     zIndex: 1000,
+    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)',
   };
 
   const logoStyle = {
-    fontSize: '1.5rem',
+    fontSize: '1.8rem',
     fontWeight: 'bold',
-    color: '#007bff',
+    color: '#e94560',
     textDecoration: 'none',
   };
 
   const buttonStyle = {
-    backgroundColor: '#007bff',
+    backgroundColor: '#e94560',
     color: '#fff',
-    padding: '8px 15px',
+    padding: '10px 20px',
     fontSize: '14px',
-    borderRadius: '5px',
+    borderRadius: '25px',
     border: 'none',
     cursor: 'pointer',
-  };
-
-  const pageStyle = {
-    background: 'linear-gradient(135deg, #6f42c1, #003366)',
-    minHeight: '100vh',
-    padding: '20px',
-    color: '#fff',
+    transition: 'background-color 0.3s',
   };
 
   const sectionStyle = {
@@ -45,6 +58,21 @@ const HomePage = () => {
     textAlign: 'center',
     margin: '0 auto',
     maxWidth: '1200px',
+  };
+
+  const headingStyle = {
+    fontSize: '3rem',
+    fontWeight: 'bold',
+    marginBottom: '20px',
+    color: '#fff',
+  };
+
+  const textStyle = {
+    fontSize: '1.2rem',
+    lineHeight: '2rem',
+    textAlign: 'left',
+    color: '#ddd',
+    marginTop: '20px',
   };
 
   const featureStyle = {
@@ -56,105 +84,89 @@ const HomePage = () => {
     marginTop: '30px',
   };
 
-  const imageStyle = {
-    borderRadius: '10px',
-    boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-    maxWidth: '30%',
-  };
-
-  const textStyle = {
-    fontSize: '1.5rem',
-    lineHeight: '2rem',
-    flex: '1',
-    textAlign: 'left',
-  };
-
-  const headingStyle = {
-    fontWeight: '900',
-    fontSize: '3rem',
-    marginBottom: '20px',
-  };
-
   const faqStyle = {
     marginTop: '50px',
     padding: '40px 20px',
     textAlign: 'center',
     color: '#fff',
+    borderTop: '2px solid #e94560',
   };
 
   const faqTitleStyle = {
-    fontWeight: '900',
     fontSize: '2.5rem',
-    marginBottom: '30px',
+    marginBottom: '20px',
+    color: '#e94560',
   };
 
   return (
-    <div style={pageStyle}>
-      {/* Header */}
-      <header style={headerStyle}>
-        <a href="/" style={logoStyle}>
-          SkillHunt
-        </a>
-        <button style={buttonStyle} onClick={() => navigate('/login')}>
-          Login / Sign Up
-        </button>
-      </header>
+    <div style={wrapperStyle}>
+      <div style={pageStyle}>
+        {/* Navigation Bar */}
+        <header style={navbarStyle}>
+          <a href="/" style={logoStyle}>
+            SkillHunt
+          </a>
+          <button style={buttonStyle} onClick={() => navigate('/login')}>
+            Login / Sign Up
+          </button>
+        </header>
 
-      {/* Hero Section */}
-      <div style={sectionStyle}>
-        <h1 style={headingStyle}>Welcome to SkillHunt</h1>
-        <p style={{ fontSize: '1.5rem', maxWidth: '800px', margin: '0 auto' }}>
-          Discover hackathons, form teams, and create groundbreaking projects with like-minded individuals.
-        </p>
-        <button 
-          style={{ ...buttonStyle, marginTop: '20px' }} 
-          onClick={() => navigate('/profile')}
-        >
-          Get Started
-        </button>
-      </div>
-
-      {/* Section 1: Explore Hackathons */}
-      <div style={sectionStyle}>
-        <h2 style={headingStyle}>Explore Hackathons</h2>
-        <div style={featureStyle}>
-          <img src="/image-1.png" alt="Explore Hackathons" style={imageStyle} />
-          <p style={textStyle}>
-            Find and participate in exciting hackathons happening worldwide. With SkillHunt, you can explore a range of hackathons tailored to your interests and skill set.
+        {/* Hero Section */}
+        <div style={sectionStyle}>
+          <h1 style={headingStyle}>Welcome to SkillHunt</h1>
+          <p style={{ fontSize: '1.5rem', maxWidth: '800px', margin: '0 auto' }}>
+            Discover hackathons, form teams, and create groundbreaking projects with like-minded individuals.
           </p>
+          <button
+            style={{ ...buttonStyle, marginTop: '20px' }}
+            onClick={() => navigate('/profile')}
+          >
+            Get Started
+          </button>
         </div>
-      </div>
 
-      {/* Section 2: Team Up */}
-      <div style={sectionStyle}>
-        <h2 style={headingStyle}>Team Up</h2>
-        <div style={featureStyle}>
-          <p style={textStyle}>
-            Connect with talented individuals to form your dream team. SkillHunt's unique platform helps you find the perfect teammates for your next big project.
-          </p>
-          <img src="/image-2.png" alt="Team Up" style={imageStyle} />
+        {/* Section 1: Explore Hackathons */}
+        <div style={sectionStyle}>
+          <h2 style={headingStyle}>Explore Hackathons</h2>
+          <div style={featureStyle}>
+            <img src="/image-1.png" alt="Explore Hackathons" style={{ maxWidth: '30%', display: 'block' }} />
+            <p style={textStyle}>
+              Find and participate in exciting hackathons happening worldwide. With SkillHunt, you can explore a range of hackathons tailored to your interests and skill set.
+            </p>
+          </div>
         </div>
-      </div>
 
-      {/* Section 3: Showcase Projects */}
-      <div style={sectionStyle}>
-        <h2 style={headingStyle}>Showcase Projects</h2>
-        <div style={featureStyle}>
-          <img src="/image-3.png" alt="Showcase Projects" style={imageStyle} />
-          <p style={textStyle}>
-            Display your projects to attract collaborators and gain recognition. Build a portfolio that stands out in the competitive world of technology and innovation.
-          </p>
+        {/* Section 2: Team Up */}
+        <div style={sectionStyle}>
+          <h2 style={headingStyle}>Team Up</h2>
+          <div style={featureStyle}>
+            <p style={textStyle}>
+              Connect with talented individuals to form your dream team. SkillHunt's unique platform helps you find the perfect teammates for your next big project.
+            </p>
+            <img src="/image-2.png" alt="Team Up" style={{ maxWidth: '30%', display: 'block' }} />
+          </div>
         </div>
-      </div>
 
-      {/* FAQ Section */}
-      <div style={faqStyle}>
-        <h2 style={faqTitleStyle}>Frequently Asked Questions</h2>
-        <div>
-          <strong>Can I use SkillHunt to find teammates for specific Hackathons or project domains?</strong>
-          <p>
-            Absolutely! SkillHunt's Team Up and Explore Hackathons pages allow you to filter and search based on specific criteria such as project domain, required skills, and technologies involved.
-          </p>
+        {/* Section 3: Showcase Projects */}
+        <div style={sectionStyle}>
+          <h2 style={headingStyle}>Showcase Projects</h2>
+          <div style={featureStyle}>
+            <img src="/image-3.png" alt="Showcase Projects" style={{ maxWidth: '30%', display: 'block' }} />
+            <p style={textStyle}>
+              Display your projects to attract collaborators and gain recognition. Build a portfolio that stands out in the competitive world of technology and innovation.
+            </p>
+          </div>
+        </div>
+
+        {/* FAQ Section */}
+        <div style={faqStyle}>
+          <h2 style={faqTitleStyle}>Frequently Asked Questions</h2>
+          <div>
+            <strong>Can I use SkillHunt to find teammates for specific Hackathons or project domains?</strong>
+            <p>
+              Absolutely! SkillHunt's Team Up and Explore Hackathons pages allow you to filter and search based on specific criteria such as project domain, required skills, and technologies involved.
+            </p>
+          </div>
         </div>
       </div>
     </div>
