@@ -1,113 +1,203 @@
 import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const ProfilePage = () => {
   return (
-    <div style={styles.container}>
+    <div
+      className="vh-100 d-flex flex-column"
+      style={{
+        background: "linear-gradient(to bottom, #2c003e, #020d40)", // Dark purple to dark blue gradient
+        color: "#ffffff",
+        margin: "0", // Remove margins
+        padding: "0", // Remove paddings
+        overflow: "hidden", // Prevent scrollbars if not necessary
+      }}
+    >
       {/* Navigation Bar */}
-      <nav style={styles.navbar}>
-        <h1 style={styles.navTitle}>Profile Dashboard</h1>
+      <nav
+        className="navbar navbar-expand-lg"
+        style={{
+          backgroundColor: "rgba(0, 0, 0, 0.6)", // Semi-transparent navbar
+        }}
+      >
+        <div className="container-fluid">
+          <a className="navbar-brand fw-bold text-danger" href="/">
+            SkillHunt
+          </a>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav ms-auto">
+              <li className="nav-item">
+                <a className="nav-link text-white" href="/explore">
+                  Explore
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link text-white" href="/teams">
+                  Teams
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link text-white" href="/events">
+                  Events
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link text-white" href="/notifications">
+                  Notifications
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </nav>
 
-      <div style={styles.profilePage}>
-        {/* Top Left Panel */}
-        <div style={styles.topLeftPanel}>
-          <h2 style={styles.panelHeader}>Profile Details</h2>
-          <ul style={styles.list}>
-            {Array.from({ length: 20 }, (_, i) => (
-              <li key={i} style={styles.listItem}>
-                Detail {i + 1}
-              </li>
-            ))}
-          </ul>
-        </div>
+      {/* Main Content */}
+      <div className="flex-grow-1 d-flex align-items-center justify-content-center">
+        <div className="container-fluid px-0">
+          <div className="row g-4 mx-0">
+            {/* Profile Sidebar */}
+            <div className="col-lg-4 col-md-5 px-0">
+              <div
+                className="card shadow-lg h-100"
+                style={{
+                  backgroundColor: "rgba(0, 0, 0, 0.6)", // Semi-transparent card background
+                  color: "#ffffff",
+                  borderRadius: "15px",
+                }}
+              >
+                <div className="card-body text-center">
+                  <img
+                    src="https://via.placeholder.com/150"
+                    alt="User"
+                    className="rounded-circle mb-3"
+                    style={{
+                      width: "120px",
+                      height: "120px",
+                      border: "5px solid #e63946",
+                    }}
+                  />
+                  <h4 className="fw-bold">John Doe</h4>
+                  <p className="text-muted">@johndoe</p>
+                  <p className="small">
+                    Passionate developer with a love for web development and
+                    team building.
+                  </p>
+                  <div className="d-flex justify-content-center gap-2 mt-3">
+                    <a
+                      href="https://twitter.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-outline-danger btn-sm"
+                    >
+                      Twitter
+                    </a>
+                    <a
+                      href="https://linkedin.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-outline-danger btn-sm"
+                    >
+                      LinkedIn
+                    </a>
+                    <a
+                      href="https://github.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-outline-danger btn-sm"
+                    >
+                      GitHub
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-        {/* Top Right Panel */}
-        <div style={styles.rightPanel}>
-          <h2 style={styles.panelHeader}>Upcoming Events</h2>
-          <ul style={styles.list}>
-            {Array.from({ length: 10 }, (_, i) => (
-              <li key={i} style={styles.listItem}>
-                Event {i + 1} - Dec {i + 1}, 2024
-              </li>
-            ))}
-          </ul>
-        </div>
+            {/* Main Profile Content */}
+            <div className="col-lg-8 col-md-7 px-0">
+              <div className="row g-4 mx-0">
+                {/* Profile Details */}
+                <div className="col-12">
+                  <div
+                    className="card shadow-lg"
+                    style={{
+                      backgroundColor: "rgba(0, 0, 0, 0.6)",
+                      color: "#ffffff",
+                      borderRadius: "15px",
+                    }}
+                  >
+                    <div className="card-body">
+                      <h5 className="card-title fw-bold">Profile Details</h5>
+                      <div className="row">
+                        <div className="col-sm-6">
+                          <p>
+                            <strong>Email:</strong> john.doe@gmail.com
+                          </p>
+                          <p>
+                            <strong>Location:</strong> New York, USA
+                          </p>
+                        </div>
+                        <div className="col-sm-6">
+                          <p>
+                            <strong>Skills:</strong> React, Node.js, MongoDB
+                          </p>
+                          <p>
+                            <strong>Member Since:</strong> Jan 2023
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-        {/* Bottom Right Panel */}
-        <div style={styles.rightPanel}>
-          <h2 style={styles.panelHeader}>Participated Projects</h2>
-          <ul style={styles.list}>
-            {Array.from({ length: 15 }, (_, i) => (
-              <li key={i} style={styles.listItem}>
-                Project {i + 1} - {i % 2 === 0 ? "Completed" : "Ongoing"}
-              </li>
-            ))}
-          </ul>
+                {/* Other Content */}
+                <div className="col-md-6">
+                  <div
+                    className="card shadow-lg h-100"
+                    style={{
+                      backgroundColor: "rgba(0, 0, 0, 0.6)",
+                      color: "#ffffff",
+                      borderRadius: "15px",
+                    }}
+                  >
+                    <div className="card-body">
+                      <h5 className="card-title fw-bold">Upcoming Events</h5>
+                      <p>Hackathon - Dec 2024</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div
+                    className="card shadow-lg h-100"
+                    style={{
+                      backgroundColor: "rgba(0, 0, 0, 0.6)",
+                      color: "#ffffff",
+                      borderRadius: "15px",
+                    }}
+                  >
+                    <div className="card-body">
+                      <h5 className="card-title fw-bold">Completed Projects</h5>
+                      <p>Project - AI Tracker</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    height: "100vh",
-    background: "linear-gradient(to bottom right, #f7f7f7, #e2e2e2)",
-  },
-  navbar: {
-    background: "#005bb5",
-    color: "#ffffff",
-    padding: "10px 20px",
-    display: "flex",
-    alignItems: "center",
-    boxShadow: "0px 2px 5px rgba(0, 0, 0, 0.2)",
-  },
-  navTitle: {
-    margin: 0,
-    fontSize: "20px",
-  },
-  profilePage: {
-    display: "grid",
-    gridTemplateColumns: "45% 1fr",
-    gridTemplateRows: "50% 50%",
-    gap: "8px", // Boxes closer together
-    padding: "10px",
-    boxSizing: "border-box",
-    flex: 1,
-  },
-  topLeftPanel: {
-    gridColumn: "1",
-    gridRow: "span 2",
-    background: "#ffffff",
-    borderRadius: "8px",
-    padding: "15px",
-    overflowY: "auto", // Adds scrolling for this box
-    boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-  },
-  rightPanel: {
-    background: "#ffffff",
-    borderRadius: "8px",
-    padding: "15px",
-    overflowY: "auto", // Adds scrolling for this box
-    boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-  },
-  panelHeader: {
-    fontSize: "16px",
-    color: "#005bb5",
-    marginBottom: "10px",
-  },
-  list: {
-    listStyle: "none",
-    padding: 0,
-    margin: 0,
-  },
-  listItem: {
-    marginBottom: "8px",
-    fontSize: "14px",
-    color: "#555555",
-  },
 };
 
 export default ProfilePage;
