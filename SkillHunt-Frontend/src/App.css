@@ -12,12 +12,12 @@ h1, h2 {
   text-align: center;
   margin-bottom: 20px;
 }
-
+/* 
 div {
   margin: 20px;
   padding: 10px;
   box-sizing: border-box;
-}
+} */
 
 .not-found {
   text-align: center;
