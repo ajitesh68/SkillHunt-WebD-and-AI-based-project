@@ -1,7 +1,8 @@
-
 import React, { useState } from "react";
 
 const TeamManagement = () => {
+  const [activeTab, setActiveTab] = useState("home");
+
   const [findTeamFormData, setFindTeamFormData] = useState({
     hackathonName: "",
     teamName: "",
@@ -22,6 +23,10 @@ const TeamManagement = () => {
     hackathon: "",
     skillSet: "",
   });
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+  };
 
   const handleFindTeamChange = (e) => {
     const { name, value } = e.target;
@@ -85,18 +90,8 @@ const TeamManagement = () => {
     backgroundColor: "#E6E6FA", // Soft lavender for a less contrasting look
     borderRadius: "10px",
     boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+    marginBottom: "2rem",
   };
-
-  /* Uncomment this for frosted glass effect
-  const boxStyle = {
-    width: "350px",
-    padding: "2rem",
-    backgroundColor: "rgba(255, 255, 255, 0.8)", // Semi-transparent white
-    backdropFilter: "blur(10px)", // Frosted glass blur effect
-    borderRadius: "10px",
-    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-  };
-  */
 
   const formStyle = {
     display: "flex",
@@ -130,19 +125,85 @@ const TeamManagement = () => {
         background: "linear-gradient(135deg, #6A0DAD, #8A2BE2)",
         minHeight: "100vh",
         display: "flex",
-        justifyContent: "center",
+        flexDirection: "column",
         alignItems: "center",
         padding: "1rem",
       }}
     >
-      <div style={{ display: "flex", gap: "2rem", flexWrap: "wrap" }}>
-        {/* Find a SkillHunt Box */}
+      {/* Navigation Bar */}
+      <nav style={{ marginBottom: "2rem" }}>
+        <ul
+          style={{
+            display: "flex",
+            listStyle: "none",
+            gap: "2rem",
+            fontSize: "1.2rem",
+            color: "#fff",
+            fontWeight: "600",
+            cursor: "pointer",
+          }}
+        >
+          <li
+            onClick={() => handleTabChange("home")}
+            style={{ cursor: "pointer" }}
+          >
+            Home
+          </li>
+          <li
+            onClick={() => handleTabChange("findSkillHunt")}
+            style={{ cursor: "pointer" }}
+          >
+            Find a SkillHunt
+          </li>
+          <li
+            onClick={() => handleTabChange("createTeam")}
+            style={{ cursor: "pointer" }}
+          >
+            Create a Team
+          </li>
+          <li
+            onClick={() => handleTabChange("findMembers")}
+            style={{ cursor: "pointer" }}
+          >
+            Find Members
+          </li>
+        </ul>
+      </nav>
+
+      {/* Dynamic Content Based on Active Tab */}
+      {activeTab === "home" && (
+        <div style={{ textAlign: "center", color: "#fff" }}>
+          <h1
+            style={{
+              fontSize: "3rem",
+              fontWeight: "700",
+              marginBottom: "1.5rem",
+            }}
+          >
+            Team Building at SkillHunt
+          </h1>
+          <p
+            style={{
+              fontSize: "1.2rem",
+              color: "#f0f0f0",
+              marginBottom: "2rem",
+            }}
+          >
+            Learn how teamwork makes the dream work! Discover how you can find
+            or create the best teams for hackathons, contests, and other exciting
+            events.
+          </p>
+        </div>
+      )}
+
+      {activeTab === "findSkillHunt" && (
         <div style={boxStyle}>
           <h2
             style={{
               textAlign: "center",
               color: "#6A0DAD",
               fontWeight: "600",
+              fontSize: "1.5rem",
               marginBottom: "1.5rem",
             }}
           >
@@ -177,21 +238,21 @@ const TeamManagement = () => {
               type="button"
               onClick={handleFindTeamSubmit}
               style={buttonStyle}
-              onMouseEnter={(e) => (e.target.style.backgroundColor = "#5B00C6")}
-              onMouseLeave={(e) => (e.target.style.backgroundColor = "#6A0DAD")}
             >
               Submit
             </button>
           </form>
         </div>
+      )}
 
-        {/* Create a Team Box */}
+      {activeTab === "createTeam" && (
         <div style={boxStyle}>
           <h2
             style={{
               textAlign: "center",
               color: "#6A0DAD",
               fontWeight: "600",
+              fontSize: "1.5rem",
               marginBottom: "1.5rem",
             }}
           >
@@ -227,15 +288,7 @@ const TeamManagement = () => {
               name="project"
               value={createTeamFormData.project}
               onChange={handleCreateTeamChange}
-              placeholder="Project Name"
-              style={inputStyle}
-            />
-            <textarea
-              name="captions"
-              value={createTeamFormData.captions}
-              onChange={handleCreateTeamChange}
-              rows="3"
-              placeholder="Team Captions"
+              placeholder="Project Idea"
               style={inputStyle}
             />
             <input
@@ -243,28 +296,28 @@ const TeamManagement = () => {
               name="email"
               value={createTeamFormData.email}
               onChange={handleCreateTeamChange}
-              placeholder="Email"
+              placeholder="Your Email"
               style={inputStyle}
             />
             <button
               type="button"
               onClick={handleCreateTeamSubmit}
               style={buttonStyle}
-              onMouseEnter={(e) => (e.target.style.backgroundColor = "#5B00C6")}
-              onMouseLeave={(e) => (e.target.style.backgroundColor = "#6A0DAD")}
             >
               Submit
             </button>
           </form>
         </div>
+      )}
 
-        {/* Find Members Box */}
+      {activeTab === "findMembers" && (
         <div style={boxStyle}>
           <h2
             style={{
               textAlign: "center",
               color: "#6A0DAD",
               fontWeight: "600",
+              fontSize: "1.5rem",
               marginBottom: "1.5rem",
             }}
           >
@@ -287,26 +340,24 @@ const TeamManagement = () => {
               placeholder="Hackathon Name"
               style={inputStyle}
             />
-            <textarea
+            <input
+              type="text"
               name="skillSet"
               value={findMembersFormData.skillSet}
               onChange={handleFindMembersChange}
-              rows="3"
-              placeholder="Skills (comma-separated)"
+              placeholder="Skill Set"
               style={inputStyle}
             />
             <button
               type="button"
               onClick={handleFindMembersSubmit}
               style={buttonStyle}
-              onMouseEnter={(e) => (e.target.style.backgroundColor = "#5B00C6")}
-              onMouseLeave={(e) => (e.target.style.backgroundColor = "#6A0DAD")}
             >
               Submit
             </button>
           </form>
         </div>
-      </div>
+      )}
     </div>
   );
 };
