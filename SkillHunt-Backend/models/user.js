@@ -5,6 +5,8 @@ const UserSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  id: { type: String, unique: true, sparse: true }, // `sparse` allows multiple nulls
+
   /*id: { type: String, required: true, unique: true }, // Unique ID for each user
   name: { type: String, required: true }, // Full name of the user
   email: { type: String, required: true, unique: true }, // User email (should be unique)

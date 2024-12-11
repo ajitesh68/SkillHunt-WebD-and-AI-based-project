@@ -2,12 +2,14 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const User = require("../models/User"); // Adjust path to your User model
-
+const User = require("../models/user"); // Adjust path to your User model
+// import mongoose from "mongoose";
+const mongoose = require("mongoose");
 // Signup
 router.post("/signup", async (req, res) => {
   const { name, email, password } = req.body;
   console.log(req.body);
+  console.log("signup ",name, email, password)
 
   try {
     // Check for missing fields
@@ -18,6 +20,7 @@ router.post("/signup", async (req, res) => {
     // Check if the email already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
+      console.log("existing user ", existingUser);
       return res.status(400).json({ message: "Email already exists!" });
     }
 
@@ -29,6 +32,7 @@ router.post("/signup", async (req, res) => {
       name,
       email,
       password: hashedPassword,
+  id: new mongoose.Types.ObjectId().toString(),
     });
 
     res.status(201).json({
@@ -36,7 +40,7 @@ router.post("/signup", async (req, res) => {
       userId: user._id, // Send the MongoDB `_id` in the response
     });
   } catch (error) {
-    console.error(error);
+    console.error("error occor ",error);
     res.status(500).json({ message: error.message });
   }
 });
