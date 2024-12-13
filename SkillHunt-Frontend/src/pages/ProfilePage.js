@@ -13,55 +13,6 @@ const ProfilePage = () => {
         overflow: "hidden", // Prevent scrollbars if not necessary
       }}
     >
-      {/* Navigation Bar */}
-      <nav
-        className="navbar navbar-expand-lg"
-        style={{
-          backgroundColor: "rgba(0, 0, 0, 0.6)", // Semi-transparent navbar
-        }}
-      >
-        <div className="container-fluid">
-          <a className="navbar-brand fw-bold text-danger" href="/">
-            SkillHunt
-          </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <a className="nav-link text-white" href="/explore">
-                  Explore
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link text-white" href="/teams">
-                  Teams
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link text-white" href="/events">
-                  Events
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link text-white" href="/notifications">
-                  Notifications
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
       {/* Main Content */}
       <div className="flex-grow-1 d-flex align-items-center justify-content-center">
         <div className="container-fluid px-0">
