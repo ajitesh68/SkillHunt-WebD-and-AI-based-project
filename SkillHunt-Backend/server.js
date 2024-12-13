@@ -27,13 +27,13 @@ app.get("/api/project", (req, res) => {
 // Define Routes
 const authRoutes = require("./routes/auth"); // Import the auth routes
 const userRoutes = require("./routes/userRoutes"); // Import the user routes
+const teamRoutes = require("./routes/teamRoutes"); // Import the team routes
+const eventRoutes = require("./routes/eventRoutes"); // Import the event routes
 
 app.use("/api/auth", authRoutes); // Mount the auth routes under /api/auth
 app.use("/api/users", userRoutes); // Mount the user routes under /api/users
-
-// Other route imports (if required)
-app.use("/api/teams", require("./routes/teamRoutes")); // Import and mount team routes
-app.use("/api/events", require("./routes/eventRoutes")); // Import and mount event routes
+app.use("/api/teams", teamRoutes); // Import and mount team routes
+app.use("/api/events", eventRoutes); // Import and mount event routes
 
 // Start the server
 app.listen(PORT, () => {
