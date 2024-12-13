@@ -1,34 +1,39 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap is loaded
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css"; // Ensure Bootstrap is loaded
 
 const SignupPage = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate(); // Initialize useNavigate
 
   const handleSignup = async (e) => {
     e.preventDefault();
 
     if (!name || !email || !password) {
-      setError('Please fill in all fields');
+      setError("Please fill in all fields");
       return;
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/signup', {
+      const response = await axios.post("http://localhost:5000/api/auth/signup", {
         name,
         email,
         password,
       });
-      alert(response.data.message);
-      navigate('/login'); // Redirect to login page after signup
+
+      if (response.status === 201) {
+        alert(response.data.message);
+        navigate("/login"); // Redirect to login page after signup
+      } else {
+        setError(response.data.message || "Signup failed");
+      }
     } catch (error) {
-      console.error('Error during signup:', error);
-      setError('Signup failed. Please try again.');
+      console.error("Error during signup:", error);
+      setError("Signup failed. Please try again.");
     }
   };
 
@@ -36,23 +41,23 @@ const SignupPage = () => {
     <div
       className="d-flex align-items-center justify-content-center vh-100"
       style={{
-        background: 'linear-gradient(135deg, #6a11cb, #2575fc)', // Magical blue-purple gradient
-        minHeight: '100vh',
+        background: "linear-gradient(135deg, #6a11cb, #2575fc)", // Gradient background
+        minHeight: "100vh",
         margin: 0,
         padding: 0,
-        overflow: 'hidden',
+        overflow: "hidden",
       }}
     >
       <div
         className="card shadow-lg p-4"
         style={{
-          width: '350px',
-          borderRadius: '10px',
-          boxShadow: '0px 15px 30px rgba(0, 0, 0, 0.1)',
-          background: '#fff',
+          width: "350px",
+          borderRadius: "10px",
+          boxShadow: "0px 15px 30px rgba(0, 0, 0, 0.1)",
+          background: "#fff",
         }}
       >
-        <h3 className="text-center mb-4" style={{ color: '#6a11cb' }}>
+        <h3 className="text-center mb-4" style={{ color: "#6a11cb" }}>
           SkillHunt Sign Up
         </h3>
 
@@ -109,13 +114,13 @@ const SignupPage = () => {
             type="submit"
             className="btn btn-primary w-100"
             style={{
-              borderRadius: '30px',
-              transition: 'transform 0.2s ease, background-color 0.3s',
-              backgroundColor: '#6a11cb',
-              borderColor: '#6a11cb',
+              borderRadius: "30px",
+              transition: "transform 0.2s ease, background-color 0.3s",
+              backgroundColor: "#6a11cb",
+              borderColor: "#6a11cb",
             }}
-            onMouseEnter={(e) => (e.target.style.transform = 'scale(1.05)')}
-            onMouseLeave={(e) => (e.target.style.transform = 'scale(1)')}
+            onMouseEnter={(e) => (e.target.style.transform = "scale(1.05)")}
+            onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
           >
             Sign Up
           </button>
@@ -123,7 +128,7 @@ const SignupPage = () => {
 
         <div className="text-center mt-3">
           <span>Already have an account? </span>
-          <a href="/login" className="text-decoration-none" style={{ color: '#6a11cb' }}>
+          <a href="/login" className="text-decoration-none" style={{ color: "#6a11cb" }}>
             Log in
           </a>
         </div>

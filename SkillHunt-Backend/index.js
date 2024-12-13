@@ -6,8 +6,7 @@ const authRoutes = require('./routes/auth');
 const projectRoutes = require('./routes/project');
 
 // Load environment variables from .env file
-require('dotenv').config();
-//dotenv.config();
+dotenv.config();
 
 const app = express();
 
@@ -25,11 +24,20 @@ console.log("mongo uri ", process.env.MONGO_URI);
 mongoose
   .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to MongoDB'))
-  .catch((err) => console.log('Database connection error:', err));
+  .catch((err) => console.log('Database connection error:', err)); 
 
 // Basic test route to check if the server is running
 app.get('/', (req, res) => {
   res.send('SkillHunt API is running');
+});
+
+// New standalone routes
+app.get("/teams", (req, res) => {
+  res.json({ message: "Teams fetched successfully!" });
+});
+
+app.post("/teams/create", (req, res) => {
+  res.json({ message: "Team created successfully!" });
 });
 
 // Start the server

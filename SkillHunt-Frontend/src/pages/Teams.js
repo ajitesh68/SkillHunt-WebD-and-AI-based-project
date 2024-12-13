@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import axios from "axios";
+
+//const PORT = process.env.PORT || 5000; //http://localhost:${PORT}
+const API_BASE_URL = "http://localhost:5000"; // Replace with your actual backend URL
 
 const TeamManagement = () => {
   const [activeTab, setActiveTab] = useState("home");
@@ -54,22 +58,44 @@ const TeamManagement = () => {
     setFindTeamFormData({ hackathonName: "", teamName: "", email: "" });
   };
 
-  const handleCreateTeamSubmit = () => {
-    const { teamName, players, hackathon, email } = createTeamFormData;
+  const handleCreateTeamSubmit = async () => {
+    const { teamName, players, hackathon, project, email } = createTeamFormData;
     if (!teamName || !players || !hackathon || !email) {
       alert("Please fill in all required fields for Create a Team.");
       return;
     }
-    console.log("Create Team Form Submitted:", createTeamFormData);
-    alert("Team created successfully!");
-    setCreateTeamFormData({
-      teamName: "",
-      players: "",
-      hackathon: "",
-      project: "",
-      captions: "",
-      email: "",
-    });
+
+    try {
+      const response = await axios.post(`${API_BASE_URL}/teams/create`, {
+        name: teamName,
+        description: project,
+        leader: email,
+        members: [{ user: email, role: "Leader" }],
+        event_id: hackathon,
+      });
+      console.log("Team Created:", response.data);
+      alert("Team created successfully!");
+      setCreateTeamFormData({
+        teamName: "",
+        players: "",
+        hackathon: "",
+        project: "",
+        captions: "",
+        email: "",
+      });
+    } catch (error) {
+      console.error("Error creating team:", error.response?.data || error.message);
+      alert("Failed to create the team. Please try again.");
+    }
+  };
+
+  const fetchTeams = async () => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/teams`);
+      console.log("Teams fetched:", response.data);
+    } catch (error) {
+      console.error("Error fetching teams:", error.response?.data || error.message);
+    }
   };
 
   const handleFindMembersSubmit = () => {
@@ -83,11 +109,10 @@ const TeamManagement = () => {
     setFindMembersFormData({ username: "", hackathon: "", skillSet: "" });
   };
 
-  // Box styles
   const boxStyle = {
     width: "350px",
     padding: "2rem",
-    backgroundColor: "#E6E6FA", // Soft lavender for a less contrasting look
+    backgroundColor: "#E6E6FA",
     borderRadius: "10px",
     boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
     marginBottom: "2rem",
@@ -130,7 +155,6 @@ const TeamManagement = () => {
         padding: "1rem",
       }}
     >
-      {/* Navigation Bar */}
       <nav style={{ marginBottom: "2rem" }}>
         <ul
           style={{
@@ -143,52 +167,19 @@ const TeamManagement = () => {
             cursor: "pointer",
           }}
         >
-          <li
-            onClick={() => handleTabChange("home")}
-            style={{ cursor: "pointer" }}
-          >
-            Home
-          </li>
-          <li
-            onClick={() => handleTabChange("findSkillHunt")}
-            style={{ cursor: "pointer" }}
-          >
-            Find a SkillHunt
-          </li>
-          <li
-            onClick={() => handleTabChange("createTeam")}
-            style={{ cursor: "pointer" }}
-          >
-            Create a Team
-          </li>
-          <li
-            onClick={() => handleTabChange("findMembers")}
-            style={{ cursor: "pointer" }}
-          >
-            Find Members
-          </li>
+          <li onClick={() => handleTabChange("home")}>Home</li>
+          <li onClick={() => handleTabChange("findSkillHunt")}>Find a SkillHunt</li>
+          <li onClick={() => handleTabChange("createTeam")}>Create a Team</li>
+          <li onClick={() => handleTabChange("findMembers")}>Find Members</li>
         </ul>
       </nav>
 
-      {/* Dynamic Content Based on Active Tab */}
       {activeTab === "home" && (
         <div style={{ textAlign: "center", color: "#fff" }}>
-          <h1
-            style={{
-              fontSize: "3rem",
-              fontWeight: "700",
-              marginBottom: "1.5rem",
-            }}
-          >
+          <h1 style={{ fontSize: "3rem", fontWeight: "700", marginBottom: "1.5rem" }}>
             Team Building at SkillHunt
           </h1>
-          <p
-            style={{
-              fontSize: "1.2rem",
-              color: "#f0f0f0",
-              marginBottom: "2rem",
-            }}
-          >
+          <p style={{ fontSize: "1.2rem", color: "#f0f0f0", marginBottom: "2rem" }}>
             Learn how teamwork makes the dream work! Discover how you can find
             or create the best teams for hackathons, contests, and other exciting
             events.
@@ -198,15 +189,7 @@ const TeamManagement = () => {
 
       {activeTab === "findSkillHunt" && (
         <div style={boxStyle}>
-          <h2
-            style={{
-              textAlign: "center",
-              color: "#6A0DAD",
-              fontWeight: "600",
-              fontSize: "1.5rem",
-              marginBottom: "1.5rem",
-            }}
-          >
+          <h2 style={{ textAlign: "center", color: "#6A0DAD", fontWeight: "600", fontSize: "1.5rem", marginBottom: "1.5rem" }}>
             Find a SkillHunt
           </h2>
           <form style={formStyle}>
@@ -234,11 +217,7 @@ const TeamManagement = () => {
               placeholder="Email"
               style={inputStyle}
             />
-            <button
-              type="button"
-              onClick={handleFindTeamSubmit}
-              style={buttonStyle}
-            >
+            <button type="button" onClick={handleFindTeamSubmit} style={buttonStyle}>
               Submit
             </button>
           </form>
@@ -247,15 +226,7 @@ const TeamManagement = () => {
 
       {activeTab === "createTeam" && (
         <div style={boxStyle}>
-          <h2
-            style={{
-              textAlign: "center",
-              color: "#6A0DAD",
-              fontWeight: "600",
-              fontSize: "1.5rem",
-              marginBottom: "1.5rem",
-            }}
-          >
+          <h2 style={{ textAlign: "center", color: "#6A0DAD", fontWeight: "600", fontSize: "1.5rem", marginBottom: "1.5rem" }}>
             Create a Team
           </h2>
           <form style={formStyle}>
@@ -299,11 +270,7 @@ const TeamManagement = () => {
               placeholder="Your Email"
               style={inputStyle}
             />
-            <button
-              type="button"
-              onClick={handleCreateTeamSubmit}
-              style={buttonStyle}
-            >
+            <button type="button" onClick={handleCreateTeamSubmit} style={buttonStyle}>
               Submit
             </button>
           </form>
@@ -312,15 +279,7 @@ const TeamManagement = () => {
 
       {activeTab === "findMembers" && (
         <div style={boxStyle}>
-          <h2
-            style={{
-              textAlign: "center",
-              color: "#6A0DAD",
-              fontWeight: "600",
-              fontSize: "1.5rem",
-              marginBottom: "1.5rem",
-            }}
-          >
+          <h2 style={{ textAlign: "center", color: "#6A0DAD", fontWeight: "600", fontSize: "1.5rem", marginBottom: "1.5rem" }}>
             Find Members
           </h2>
           <form style={formStyle}>
@@ -348,11 +307,7 @@ const TeamManagement = () => {
               placeholder="Skill Set"
               style={inputStyle}
             />
-            <button
-              type="button"
-              onClick={handleFindMembersSubmit}
-              style={buttonStyle}
-            >
+            <button type="button" onClick={handleFindMembersSubmit} style={buttonStyle}>
               Submit
             </button>
           </form>
