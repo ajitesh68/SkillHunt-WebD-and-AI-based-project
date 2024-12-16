@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const connectDB = require("./db"); // Ensure this path points to your `db.js`
+const mongoose = require("mongoose");
+const connectDB = require("./db"); // Ensure this path points to your db.js
 require("dotenv").config(); // Load environment variables from the .env file
 
 const app = express();
@@ -11,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
-connectDB();
+//connectDB(); // This will connect to MongoDB using the settings in db.js or a default URI
 
 // Simulated project data (for reference if required)
 const projects = [
@@ -24,16 +25,23 @@ app.get("/api/project", (req, res) => {
   res.status(200).json(projects);
 });
 
-// Define Routes
-const authRoutes = require("./routes/auth"); // Import the auth routes
-const userRoutes = require("./routes/userRoutes"); // Import the user routes
-const teamRoutes = require("./routes/teamRoutes"); // Import the team routes
-const eventRoutes = require("./routes/eventRoutes"); // Import the event routes
+// Import Routes
+const authRoutes = require("./routes/auth"); // Import auth routes
+const userRoutes = require("./routes/userRoutes"); // Import user routes
+const teamRoutes = require("./routes/teamRoutes"); // Import team routes
+const eventRoutes = require("./routes/eventRoutes"); // Import event routes
 
-app.use("/api/auth", authRoutes); // Mount the auth routes under /api/auth
-app.use("/api/users", userRoutes); // Mount the user routes under /api/users
-app.use("/api/teams", teamRoutes); // Import and mount team routes
-app.use("/api/events", eventRoutes); // Import and mount event routes
+// Use Routes
+app.use("/api/auth", authRoutes); // Mount auth routes under /api/auth
+app.use("/api/users", userRoutes); // Mount user routes under /api/users
+app.use("/api/teams", teamRoutes); // Mount team routes under /api/teams
+app.use("/api/events", eventRoutes); // Mount event routes under /api/events
+
+// Connect to MongoDB (updated)
+mongoose.connect('mongodb://localhost:27017/skillhunt', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(() => console.log('MongoDB connected')).catch(err => console.error(err));
 
 // Start the server
 app.listen(PORT, () => {

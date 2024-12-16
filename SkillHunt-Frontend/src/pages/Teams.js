@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-//const PORT = process.env.PORT || 5000; //http://localhost:${PORT}
 const API_BASE_URL = "http://localhost:5000"; // Replace with your actual backend URL
 
 const TeamManagement = () => {
@@ -47,14 +46,24 @@ const TeamManagement = () => {
     setFindMembersFormData({ ...findMembersFormData, [name]: value });
   };
 
-  const handleFindTeamSubmit = () => {
+  const handleFindTeamSubmit = async () => {
     const { hackathonName, teamName, email } = findTeamFormData;
     if (!hackathonName || !teamName || !email) {
       alert("Please fill in all required fields for Find a SkillHunt.");
       return;
     }
-    console.log("Find Team Form Submitted:", findTeamFormData);
-    alert("Team search submitted successfully!");
+    try {
+      const response = await axios.post(`${API_BASE_URL}/teams/find`, {
+        hackathonName,
+        teamName,
+        email,
+      });
+      console.log("Find Team Response:", response.data);
+      alert("Team search submitted successfully!");
+    } catch (error) {
+      console.error("Error finding team:", error.response?.data || error.message);
+      alert("Failed to find the team. Please try again.");
+    }
     setFindTeamFormData({ hackathonName: "", teamName: "", email: "" });
   };
 
@@ -70,7 +79,7 @@ const TeamManagement = () => {
         name: teamName,
         description: project,
         leader: email,
-        members: [{ user: email, role: "Leader" }],
+        members: [{ user: email, role: "Leader" }], // Add leader role initially
         event_id: hackathon,
       });
       console.log("Team Created:", response.data);
@@ -98,14 +107,24 @@ const TeamManagement = () => {
     }
   };
 
-  const handleFindMembersSubmit = () => {
+  const handleFindMembersSubmit = async () => {
     const { username, hackathon, skillSet } = findMembersFormData;
     if (!username || !hackathon || !skillSet) {
       alert("Please fill in all required fields for Find Members.");
       return;
     }
-    console.log("Find Members Form Submitted:", findMembersFormData);
-    alert("Member search submitted successfully!");
+    try {
+      const response = await axios.post(`${API_BASE_URL}/members/find`, {
+        username,
+        hackathon,
+        skillSet,
+      });
+      console.log("Find Members Response:", response.data);
+      alert("Member search submitted successfully!");
+    } catch (error) {
+      console.error("Error finding members:", error.response?.data || error.message);
+      alert("Failed to find members. Please try again.");
+    }
     setFindMembersFormData({ username: "", hackathon: "", skillSet: "" });
   };
 
@@ -187,43 +206,6 @@ const TeamManagement = () => {
         </div>
       )}
 
-      {activeTab === "findSkillHunt" && (
-        <div style={boxStyle}>
-          <h2 style={{ textAlign: "center", color: "#6A0DAD", fontWeight: "600", fontSize: "1.5rem", marginBottom: "1.5rem" }}>
-            Find a SkillHunt
-          </h2>
-          <form style={formStyle}>
-            <input
-              type="text"
-              name="hackathonName"
-              value={findTeamFormData.hackathonName}
-              onChange={handleFindTeamChange}
-              placeholder="Hackathon Name"
-              style={inputStyle}
-            />
-            <input
-              type="text"
-              name="teamName"
-              value={findTeamFormData.teamName}
-              onChange={handleFindTeamChange}
-              placeholder="Team Name"
-              style={inputStyle}
-            />
-            <input
-              type="email"
-              name="email"
-              value={findTeamFormData.email}
-              onChange={handleFindTeamChange}
-              placeholder="Email"
-              style={inputStyle}
-            />
-            <button type="button" onClick={handleFindTeamSubmit} style={buttonStyle}>
-              Submit
-            </button>
-          </form>
-        </div>
-      )}
-
       {activeTab === "createTeam" && (
         <div style={boxStyle}>
           <h2 style={{ textAlign: "center", color: "#6A0DAD", fontWeight: "600", fontSize: "1.5rem", marginBottom: "1.5rem" }}>
@@ -259,7 +241,7 @@ const TeamManagement = () => {
               name="project"
               value={createTeamFormData.project}
               onChange={handleCreateTeamChange}
-              placeholder="Project Idea"
+              placeholder="Project Description"
               style={inputStyle}
             />
             <input
@@ -267,7 +249,7 @@ const TeamManagement = () => {
               name="email"
               value={createTeamFormData.email}
               onChange={handleCreateTeamChange}
-              placeholder="Your Email"
+              placeholder="Email"
               style={inputStyle}
             />
             <button type="button" onClick={handleCreateTeamSubmit} style={buttonStyle}>
@@ -288,7 +270,7 @@ const TeamManagement = () => {
               name="username"
               value={findMembersFormData.username}
               onChange={handleFindMembersChange}
-              placeholder="Username"
+              placeholder="Your Name"
               style={inputStyle}
             />
             <input
@@ -304,7 +286,7 @@ const TeamManagement = () => {
               name="skillSet"
               value={findMembersFormData.skillSet}
               onChange={handleFindMembersChange}
-              placeholder="Skill Set"
+              placeholder="Skills Needed"
               style={inputStyle}
             />
             <button type="button" onClick={handleFindMembersSubmit} style={buttonStyle}>
