@@ -1,13 +1,9 @@
 {
   "dependencies": {
-<<<<<<< HEAD
     "mongodb": "^6.12.0",
     "react-calendar": "^5.1.0"
-=======
-    "mongodb": "^6.12.0"
   },
   "devDependencies": {
     "webpack": "^5.97.1"
->>>>>>> 3389434fa5abf49c7115abed934620bfb54dfd53
   }
 }

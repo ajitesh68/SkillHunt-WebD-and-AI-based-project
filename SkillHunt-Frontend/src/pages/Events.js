@@ -87,153 +87,145 @@ const EventsPage = () => {
         Upcoming Events
       </h1>
 
-      {/* Carousel */}
-      <div className="container mt-4">
-        <div id="eventCarousel" className="carousel slide" data-bs-ride="carousel">
-          <div className="carousel-inner" style={{ height: '300px' }}>
-            <div className="carousel-item active">
-              <img 
-                src="events1.jpeg" 
-                className="d-block w-100" 
-                alt="Event 1" 
-                style={{ objectFit: 'cover', height: '300px' }} 
-              />
-              <div className="carousel-caption d-none d-md-block">
-                <h5>Hackathon 2024</h5>
-                <p>A 48-hour coding marathon with great prizes!</p>
-              </div>
-            </div>
-            <div className="carousel-item">
-              <img 
-                src="events2.jpeg" 
-                className="d-block w-100" 
-                alt="Event 2" 
-                style={{ objectFit: 'cover', height: '300px' }} 
-              />
-              <div className="carousel-caption d-none d-md-block">
-                <h5>Frontend WebDev Challenge</h5>
-                <p>Build a responsive web application with React.</p>
-              </div>
-            </div>
-            <div className="carousel-item">
-              <img 
-                src="events3.webp" 
-                className="d-block w-100" 
-                alt="Event 3" 
-                style={{ objectFit: 'cover', height: '300px' }} 
-              />
-              <div className="carousel-caption d-none d-md-block">
-                <h5>AI and Machine Learning Workshop</h5>
-                <p>Learn the fundamentals of AI and ML.</p>
-              </div>
-            </div>
+      {/* Carousel Section */}
+      <div id="eventCarousel" className="carousel slide mb-4" data-bs-ride="carousel">
+        <div className="carousel-inner" style={{ height: '300px' }}>
+          <div className="carousel-item active">
+            <img src="events1.jpeg" className="d-block w-100" alt="Event 1" style={{ objectFit: 'cover', height: '100%' }} />
           </div>
-          <button className="carousel-control-prev" type="button" data-bs-target="#eventCarousel" data-bs-slide="prev">
-            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span className="visually-hidden">Previous</span>
-          </button>
-          <button className="carousel-control-next" type="button" data-bs-target="#eventCarousel" data-bs-slide="next">
-            <span className="carousel-control-next-icon" aria-hidden="true"></span>
-            <span className="visually-hidden">Next</span>
-          </button>
+          <div className="carousel-item">
+            <img src="events2.jpeg" className="d-block w-100" alt="Event 2" style={{ objectFit: 'cover', height: '100%' }} />
+          </div>
+          <div className="carousel-item">
+            <img src="events3.webp" className="d-block w-100" alt="Event 3" style={{ objectFit: 'cover', height: '100%' }} />
+          </div>
+        </div>
+        <button className="carousel-control-prev" type="button" data-bs-target="#eventCarousel" data-bs-slide="prev">
+          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span className="visually-hidden">Previous</span>
+        </button>
+        <button className="carousel-control-next" type="button" data-bs-target="#eventCarousel" data-bs-slide="next">
+          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+          <span className="visually-hidden">Next</span>
+        </button>
+      </div>
+
+      {/* Filters Section */}
+      <div className="d-flex justify-content-around align-items-center flex-wrap mb-4" style={{ gap: '15px' }}>
+        <div>
+          <label style={{ fontWeight: 'bold', color: '#fff' }}>Month: </label>
+          <select
+            className="form-select"
+            onChange={handleMonthChange}
+            value={selectedMonth}
+            style={{
+              width: '120px',
+              backgroundColor: '#6a0dad',
+              color: '#000',
+              border: 'none',
+              borderRadius: '5px',
+              fontWeight: 'bold',
+            }}
+          >
+            <option value="0">Jan</option>
+            <option value="1">Feb</option>
+            <option value="2">Mar</option>
+            <option value="3">Apr</option>
+            <option value="4">May</option>
+            <option value="5">Jun</option>
+            <option value="6">Jul</option>
+            <option value="7">Aug</option>
+            <option value="8">Sep</option>
+            <option value="9">Oct</option>
+            <option value="10">Nov</option>
+            <option value="11">Dec</option>
+          </select>
+        </div>
+        <div>
+          <label style={{ fontWeight: 'bold', color: '#fff' }}>Year: </label>
+          <select
+            className="form-select"
+            onChange={handleYearChange}
+            value={selectedYear}
+            style={{
+              width: '120px',
+              backgroundColor: '#6a0dad',
+              color: '#000',
+              border: 'none',
+              borderRadius: '5px',
+              fontWeight: 'bold',
+            }}
+          >
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+          </select>
+        </div>
+        <div>
+          <label style={{ fontWeight: 'bold', color: '#fff' }}>Event Type: </label>
+          <select
+            className="form-select"
+            onChange={(e) => setEventTypeFilter(e.target.value)}
+            value={eventTypeFilter}
+            style={{
+              width: '150px',
+              backgroundColor: '#6a0dad',
+              color: '#000',
+              border: 'none',
+              borderRadius: '5px',
+              fontWeight: 'bold',
+            }}
+          >
+            <option value="All">All</option>
+            <option value="Hackathon">Hackathon</option>
+            <option value="Coding Challenge">Coding</option>
+            <option value="Workshop">Workshop</option>
+          </select>
+        </div>
+        <div>
+          <label style={{ fontWeight: 'bold', color: '#fff' }}>Skill Level: </label>
+          <select
+            className="form-select"
+            onChange={(e) => setSkillLevelFilter(e.target.value)}
+            value={skillLevelFilter}
+            style={{
+              width: '150px',
+              backgroundColor: '#6a0dad',
+              color: '#000',
+              border: 'none',
+              borderRadius: '5px',
+              fontWeight: 'bold',
+            }}
+          >
+            <option value="All">All</option>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+          </select>
         </div>
       </div>
 
-      {/* Month and Year Selector */}
-      <div className="mb-4">
-        <div className="row">
-          <div className="col-md-6">
-            <label>Month: </label>
-            <select className="form-select" onChange={handleMonthChange} value={selectedMonth}>
-              <option value="0">January</option>
-              <option value="1">February</option>
-              <option value="2">March</option>
-              <option value="3">April</option>
-              <option value="4">May</option>
-              <option value="5">June</option>
-              <option value="6">July</option>
-              <option value="7">August</option>
-              <option value="8">September</option>
-              <option value="9">October</option>
-              <option value="10">November</option>
-              <option value="11">December</option>
-            </select>
-          </div>
-          <div className="col-md-6">
-            <label>Year: </label>
-            <select className="form-select" onChange={handleYearChange} value={selectedYear}>
-              <option value="2024">2024</option>
-              <option value="2025">2025</option>
-              <option value="2026">2026</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      {/* Event Filters */}
-      <div className="mb-4">
-        <div className="row">
-          <div className="col-md-6">
-            <label>Event Type: </label>
-            <select className="form-select" onChange={(e) => setEventTypeFilter(e.target.value)} value={eventTypeFilter}>
-              <option value="All">All</option>
-              <option value="Hackathon">Hackathon</option>
-              <option value="Coding Challenge">Coding Challenge</option>
-              <option value="Workshop">Workshop</option>
-            </select>
-          </div>
-          <div className="col-md-6">
-            <label>Skill Level: </label>
-            <select className="form-select" onChange={(e) => setSkillLevelFilter(e.target.value)} value={skillLevelFilter}>
-              <option value="All">All</option>
-              <option value="Beginner">Beginner</option>
-              <option value="Intermediate">Intermediate</option>
-              <option value="Advanced">Advanced</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
+      {/* Event Cards */}
       <div className="row">
-        <div className="col-md-12">
-          <div className="card" style={{ backgroundColor: '#23234d' }}>
-            <div className="card-body">
-              <h4 className="card-title" style={{ color: '#e94560', fontWeight: 'bold' }}>
-                Scheduled Events for {new Date(selectedYear, selectedMonth).toLocaleString('default', { month: 'long' })} {selectedYear}
-              </h4>
-              {filteredEvents.length === 0 ? (
-                <p>No events available for the selected filters.</p>
-              ) : (
-                filteredEvents.map(event => (
-                  <div key={event.id} className="card mb-4" style={{ backgroundColor: '#1a1a2e' }}>
-                    <div className="card-body">
-                      <h5 className="card-title" style={{ fontWeight: 'bold', color: '#fff' }}>{event.title}</h5>
-                      <p className="card-text" style={{ color: '#e94560', fontWeight: 'bold' }}>{event.description}</p>
-                      <p className="card-text" style={{ color: '#fff' }}>Date: {new Date(event.date).toLocaleString()}</p>
-                      <p className="card-text" style={{ color: '#fff' }}>Location: {event.location}</p>
-                      <p className="card-text" style={{ color: '#fff' }}>Organizer: {event.organizer}</p>
-                      {!event.isRegistered ? (
-                        <button
-                          className="btn btn-primary"
-                          onClick={() => handleEventRegistration(event.id)}
-                        >
-                          Register
-                        </button>
-                      ) : (
-                        <button
-                          className="btn btn-danger"
-                          onClick={() => handleEventDeregistration(event.id)}
-                        >
-                          Unregister
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                ))
-              )}
+        {filteredEvents.map((event) => (
+          <div key={event.id} className="col-md-4 mb-4">
+            <div className="card bg-dark text-white">
+              <img src={`https://via.placeholder.com/400x200?text=${event.title}`} className="card-img" alt={event.title} />
+              <div className="card-img-overlay d-flex flex-column justify-content-end">
+                <h5 className="card-title" style={{ color: '#fff' }}>{event.title}</h5>
+                <p className="card-text" style={{ color: '#e94560' }}>
+                  <FaRegCalendarAlt /> {new Date(event.date).toLocaleDateString()}
+                </p>
+                <button
+                  className={`btn ${event.isRegistered ? 'btn-danger' : 'btn-success'}`}
+                  onClick={() => event.isRegistered ? handleEventDeregistration(event.id) : handleEventRegistration(event.id)}
+                >
+                  {event.isRegistered ? 'Unregister' : 'Register'}
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );
