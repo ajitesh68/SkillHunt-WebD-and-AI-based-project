@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals'; // Optional, only for performance tracking
 
+
+
 // Creating the root element using React 18's `createRoot`
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
