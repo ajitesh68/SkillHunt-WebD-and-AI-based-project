@@ -18,7 +18,12 @@
     "react-icons": "^5.4.0",
     "react-router-dom": "^6.28.0",
     "react-scripts": "^5.0.1",
+<<<<<<< HEAD
     "web-vitals": "^2.1.4"
+=======
+    "web-vitals": "^2.1.4",
+    "webpack": "4.42.0"
+>>>>>>> c79d883b8d023e54c042f1a7afd853e2a3645ebe
   },
   "scripts": {
     "start": "react-scripts start",
