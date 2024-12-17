@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/User"); // Ensure the path points to your User model
+const User = require("../models/user"); // Ensure the path points to your User model
 
 // POST: Create a new user
 router.post("/", async (req, res) => {
