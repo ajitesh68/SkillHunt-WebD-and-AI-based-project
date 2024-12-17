@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const connectDB = require("./db"); // Ensure this path points to your `db.js`
 require("dotenv").config(); // Load environment variables from the .env file
-
+const aiRouter = require('./routes/ai')
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -34,6 +34,8 @@ app.use("/api/auth", authRoutes); // Mount the auth routes under /api/auth
 app.use("/api/users", userRoutes); // Mount the user routes under /api/users
 app.use("/api/teams", teamRoutes); // Import and mount team routes
 app.use("/api/events", eventRoutes); // Import and mount event routes
+
+app.use('/api/ai/', aiRouter); // AI routes
 
 // Start the server
 app.listen(PORT, () => {

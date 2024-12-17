@@ -1,6 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { CopilotPopup } from "@copilotkit/react-ui"; 
+import "@copilotkit/react-ui/styles.css"; 
+
+
+
 const HomePage = () => {
   const navigate = useNavigate();
 
@@ -169,6 +174,7 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+      <CopilotPopup runtimeUrl='http://localhost:5000/api/ai/copilot-endpoint'/>
     </div>
   );
 };
