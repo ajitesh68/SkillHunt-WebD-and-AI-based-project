@@ -9,8 +9,7 @@ const teamRoutes = require("./routes/teamRoutes");
 const eventRoutes = require("./routes/eventRoutes");
 
 // Load environment variables from .env file
-require('dotenv').config();
-//dotenv.config();
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;

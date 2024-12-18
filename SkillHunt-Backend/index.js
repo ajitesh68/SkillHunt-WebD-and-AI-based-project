@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const projectRoutes = require('./routes/project');
+const aiRoutes = require('./routes/ai')
 
 // Load environment variables from .env file
 dotenv.config();
@@ -17,6 +18,7 @@ app.use(express.json()); // Enable JSON parsing for request bodies
 // Routes
 app.use('/api/auth', authRoutes); // Auth routes (signup, login, etc.)
 app.use('/api/project', projectRoutes); // Project routes
+app.use('/api/ai/', aiRoutes); // AI routes
 
 // MongoDB Connection
 console.log("mongo uri ", process.env.MONGO_URI);

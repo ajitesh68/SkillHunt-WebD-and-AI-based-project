@@ -9,6 +9,7 @@ import Notifications from "./pages/Notifications";
 import ProfilePage from "./pages/ProfilePage";
 import EventsPage from "./pages/Events"; // New page added for events
 
+
 import "./App.css";
 
 function App() {
