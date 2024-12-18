@@ -1,4 +1,4 @@
-const express = require('express');
+/*const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
@@ -21,10 +21,10 @@ app.use('/api/project', projectRoutes); // Project routes
 // MongoDB Connection
 console.log("mongo uri ", process.env.MONGO_URI);
 
-/*mongoose
+mongoose
   .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to MongoDB'))
-  .catch((err) => console.log('Database connection error:', err)); */
+  .catch((err) => console.log('Database connection error:', err)); 
 
 // Basic test route to check if the server is running
 app.get('/', (req, res) => {
@@ -42,6 +42,7 @@ app.post("/teams/create", (req, res) => {
 
 // Start the server
 const PORT = process.env.PORT || 5000;
-/*app.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-});*/
+});
+*/

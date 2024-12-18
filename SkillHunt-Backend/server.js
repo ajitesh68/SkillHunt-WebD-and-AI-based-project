@@ -1,49 +1,53 @@
 const express = require("express");
-const cors = require("cors");
 const mongoose = require("mongoose");
-const connectDB = require("./db"); // Ensure this path points to your db.js
-require("dotenv").config(); // Load environment variables from the .env file
+const dotenv = require("dotenv");
+const cors = require("cors");
+const authRoutes = require("./routes/auth");
+const projectRoutes = require("./routes/project");
+const userRoutes = require("./routes/userRoutes");
+const teamRoutes = require("./routes/teamRoutes");
+const eventRoutes = require("./routes/eventRoutes");
+
+// Load environment variables from .env file
+require('dotenv').config();
+//dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
-app.use(express.json());
+app.use(cors()); // Enable CORS
+app.use(express.json()); // Enable JSON parsing for request bodies
 
-// Connect to MongoDB
-//connectDB(); // This will connect to MongoDB using the settings in db.js or a default URI
+// MongoDB Connection
+console.log("mongo uri ", process.env.MONGO_URI);
+mongoose
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.log("Database connection error:", err));
 
-// Simulated project data (for reference if required)
-const projects = [
-  { id: 1, title: "AI Project", description: "Description of AI Project" },
-  { id: 2, title: "Web Dev Project", description: "Description of Web Dev Project" },
-];
+// Routes
+app.use("/api/auth", authRoutes); // Auth routes (signup, login, etc.)
+app.use("/api/project", projectRoutes); // Project routes
+app.use("/api/users", userRoutes); // User routes
+app.use("/api/teams", teamRoutes); // Team routes
+app.use("/api/events", eventRoutes); // Event routes
 
-// API route to fetch projects
-app.get("/api/project", (req, res) => {
-  res.status(200).json(projects);
+// Basic test route to check if the server is running
+app.get("/", (req, res) => {
+  res.send("SkillHunt API is running");
 });
 
-// Import Routes
-const authRoutes = require("./routes/auth"); // Import auth routes
-const userRoutes = require("./routes/userRoutes"); // Import user routes
-const teamRoutes = require("./routes/teamRoutes"); // Import team routes
-const eventRoutes = require("./routes/eventRoutes"); // Import event routes
+// New standalone routes for teams
+app.get("/teams", (req, res) => {
+  res.json({ message: "Teams fetched successfully!" });
+});
 
-// Use Routes
-app.use("/api/auth", authRoutes); // Mount auth routes under /api/auth
-app.use("/api/users", userRoutes); // Mount user routes under /api/users
-app.use("/api/teams", teamRoutes); // Mount team routes under /api/teams
-app.use("/api/events", eventRoutes); // Mount event routes under /api/events
-
-// Connect to MongoDB (updated)
-mongoose.connect('mongodb://localhost:27017/skillhunt', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => console.log('MongoDB connected')).catch(err => console.error(err));
+app.post("/teams/create", (req, res) => {
+  res.json({ message: "Team created successfully!" });
+});
 
 // Start the server
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });

@@ -1,101 +1,73 @@
-const express = require("express");
+// routes/teamRouter.js
+const express = require('express');
+const { Team, Member, SkillHunt } = require('../models/team'); // Import Models
+
 const router = express.Router();
-const Team = require("../models/team");
 
-// POST route to create a team (with extended fields like name, description, etc.)
-router.post("/create", async (req, res) => {
+// Create a team
+router.post('/create', async (req, res) => {
   try {
-    const { name, description, leader, members, event_id, skills } = req.body;
-
-    // Basic validation to ensure required fields are provided
-    if (!name) {
-      return res.status(400).json({ error: "Team name is required!" });
-    }
+    // Destructure request body
+    const { name, description, leader, event_id, members } = req.body;
 
     // Create a new team document
-    const team = new Team({
-      id: Date.now().toString(), // Generating a unique ID (can be replaced by a better logic)
+    const newTeam = new Team({
       name,
       description,
       leader,
-      members,
       event_id,
-      skills,
+      members,
     });
 
-    // Save the team to the database
-    await team.save();
-    
-    res.status(201).json({ message: "Team created successfully!", team });
+    // Save the team to MongoDB
+    const savedTeam = await newTeam.save();
+    console.log("Saved team:", savedTeam); // Add this line to check if saving is successful
+
+    // Respond with the saved team
+    res.status(201).json({
+      message: "Team created successfully!",
+      team: savedTeam,
+    });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Failed to create the team. Please try again." });
+    res.status(500).json({ message: "Failed to create the team", error });
   }
 });
 
-// GET route to fetch all teams (with population)
-router.get("/", async (req, res) => {
-  try {
-    // Fetch all teams and populate leader and members fields
-    const teams = await Team.find()
-      .populate("leader", "name email") // Populate leader with specific fields
-      .populate("members.user", "name email"); // Populate members with specific fields
+// Find a team in SkillHunt
+router.post('/find', async (req, res) => {
+    const { hackathonName, teamName, email } = req.body;
 
-    res.json(teams);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+    try {
+        const newSkillHunt = new SkillHunt({
+            hackathonName,
+            teamName,
+            email
+        });
 
-// POST route to find a team (search by hackathon, team name, and email)
-router.post("/find", async (req, res) => {
-  const { hackathonName, teamName, email } = req.body;
-
-  // Basic validation to ensure the necessary fields are provided
-  if (!hackathonName || !teamName || !email) {
-    return res.status(400).json({ error: "All fields (hackathonName, teamName, email) are required." });
-  }
-
-  try {
-    // Search for the team by hackathonName, teamName, and email
-    const team = await Team.findOne({
-      name: teamName,
-      event_id: hackathonName,
-      "members.user": email, // Matching the user's email in the team members array
-    })
-      .populate("leader", "name email") // Populate leader with specific fields
-      .populate("members.user", "name email"); // Populate members with specific fields
-
-    if (!team) {
-      return res.status(404).json({ error: "Team not found." });
+        await newSkillHunt.save();
+        res.status(200).json({ message: 'SkillHunt search submitted successfully!' });
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to submit skillhunt search', error: error.message });
     }
-
-    // Return the found team
-    res.status(200).json(team);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
 });
 
-// POST route to create a team (basic version, without skills)
-router.post("/", async (req, res) => {
-  try {
-    const newTeam = new Team(req.body);
-    const savedTeam = await newTeam.save();
-    res.status(201).json(savedTeam);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
+// Find members based on username, hackathon, and skillset
+router.post('/find-members', async (req, res) => {
+    const { username, hackathon, skillSet } = req.body;
 
-// GET route to fetch all teams (basic version)
-router.get("/all", async (req, res) => {
-  try {
-    const teams = await Team.find();
-    res.status(200).json(teams);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+    try {
+        const newMemberSearch = new Member({
+            username,
+            hackathon,
+            skillSet
+        });
+
+        await newMemberSearch.save();
+        res.status(200).json({ message: 'Member search submitted successfully!' });
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to submit member search', error: error.message });
+    }
 });
 
 module.exports = router;

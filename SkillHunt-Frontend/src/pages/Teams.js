@@ -6,6 +6,7 @@ const API_BASE_URL = "http://localhost:5000"; // Replace with your actual backen
 const TeamManagement = () => {
   const [activeTab, setActiveTab] = useState("home");
 
+  // Form data states
   const [findTeamFormData, setFindTeamFormData] = useState({
     hackathonName: "",
     teamName: "",
@@ -14,11 +15,10 @@ const TeamManagement = () => {
 
   const [createTeamFormData, setCreateTeamFormData] = useState({
     teamName: "",
-    players: "",
-    hackathon: "",
-    project: "",
-    captions: "",
-    email: "",
+    description: "",
+    leader: "",
+    event_id: "",
+    members: [{ user: "", role: "Leader" }],
   });
 
   const [findMembersFormData, setFindMembersFormData] = useState({
@@ -31,6 +31,7 @@ const TeamManagement = () => {
     setActiveTab(tab);
   };
 
+  // Form field change handlers
   const handleFindTeamChange = (e) => {
     const { name, value } = e.target;
     setFindTeamFormData({ ...findTeamFormData, [name]: value });
@@ -38,7 +39,14 @@ const TeamManagement = () => {
 
   const handleCreateTeamChange = (e) => {
     const { name, value } = e.target;
-    setCreateTeamFormData({ ...createTeamFormData, [name]: value });
+    if (name === "members") {
+      setCreateTeamFormData({
+        ...createTeamFormData,
+        members: [{ user: value, role: "Leader" }],
+      });
+    } else {
+      setCreateTeamFormData({ ...createTeamFormData, [name]: value });
+    }
   };
 
   const handleFindMembersChange = (e) => {
@@ -46,6 +54,7 @@ const TeamManagement = () => {
     setFindMembersFormData({ ...findMembersFormData, [name]: value });
   };
 
+  // Submit handlers
   const handleFindTeamSubmit = async () => {
     const { hackathonName, teamName, email } = findTeamFormData;
     if (!hackathonName || !teamName || !email) {
@@ -68,8 +77,8 @@ const TeamManagement = () => {
   };
 
   const handleCreateTeamSubmit = async () => {
-    const { teamName, players, hackathon, project, email } = createTeamFormData;
-    if (!teamName || !players || !hackathon || !email) {
+    const { teamName, description, leader, event_id } = createTeamFormData;
+    if (!teamName || !description || !leader || !event_id) {
       alert("Please fill in all required fields for Create a Team.");
       return;
     }
@@ -77,33 +86,23 @@ const TeamManagement = () => {
     try {
       const response = await axios.post(`${API_BASE_URL}/teams/create`, {
         name: teamName,
-        description: project,
-        leader: email,
-        members: [{ user: email, role: "Leader" }], // Add leader role initially
-        event_id: hackathon,
+        description: description,
+        leader: leader,
+        event_id: event_id,
+        members: [{ user: leader, role: "Leader" }],
       });
       console.log("Team Created:", response.data);
       alert("Team created successfully!");
       setCreateTeamFormData({
         teamName: "",
-        players: "",
-        hackathon: "",
-        project: "",
-        captions: "",
-        email: "",
+        description: "",
+        leader: "",
+        event_id: "",
+        members: [{ user: "", role: "Leader" }],
       });
     } catch (error) {
       console.error("Error creating team:", error.response?.data || error.message);
       alert("Failed to create the team. Please try again.");
-    }
-  };
-
-  const fetchTeams = async () => {
-    try {
-      const response = await axios.get(`${API_BASE_URL}/teams`);
-      console.log("Teams fetched:", response.data);
-    } catch (error) {
-      console.error("Error fetching teams:", error.response?.data || error.message);
     }
   };
 
@@ -221,39 +220,31 @@ const TeamManagement = () => {
               style={inputStyle}
             />
             <input
-              type="number"
-              name="players"
-              value={createTeamFormData.players}
-              onChange={handleCreateTeamChange}
-              placeholder="Number of Players"
-              style={inputStyle}
-            />
-            <input
               type="text"
-              name="hackathon"
-              value={createTeamFormData.hackathon}
-              onChange={handleCreateTeamChange}
-              placeholder="Hackathon Name"
-              style={inputStyle}
-            />
-            <input
-              type="text"
-              name="project"
-              value={createTeamFormData.project}
+              name="description"
+              value={createTeamFormData.description}
               onChange={handleCreateTeamChange}
               placeholder="Project Description"
               style={inputStyle}
             />
             <input
               type="email"
-              name="email"
-              value={createTeamFormData.email}
+              name="leader"
+              value={createTeamFormData.leader}
               onChange={handleCreateTeamChange}
-              placeholder="Email"
+              placeholder="Team Leader Email"
+              style={inputStyle}
+            />
+            <input
+              type="text"
+              name="event_id"
+              value={createTeamFormData.event_id}
+              onChange={handleCreateTeamChange}
+              placeholder="Hackathon/Event ID"
               style={inputStyle}
             />
             <button type="button" onClick={handleCreateTeamSubmit} style={buttonStyle}>
-              Submit
+              Create Team
             </button>
           </form>
         </div>

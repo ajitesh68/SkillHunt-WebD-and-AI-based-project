@@ -1,5 +1,5 @@
 // models/team.js
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 // Team Schema
 const teamSchema = new mongoose.Schema({
@@ -8,21 +8,72 @@ const teamSchema = new mongoose.Schema({
         required: true
     },
     description: {
-        type: String,
+        type: String, // Project description or additional info
     },
-    createdBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+    leader: {
+        type: String, // Email of the team leader
+        required: true
+    },
+    event_id: {
+        type: String, // Reference to the hackathon or event name
         required: true
     },
     members: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }],
+        user: {
+            type: String, // Email of the user
+            required: true
+        },
+        role: {
+            type: String, // Role of the member (e.g., Leader, Member)
+            default: "Member"
+        }
+    }]
 }, {
     timestamps: true // Automatically add createdAt and updatedAt fields
 });
 
-const Team = mongoose.model('Team', teamSchema);
+// Member Schema for Find Members
+const memberSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true
+    },
+    hackathon: {
+        type: String, // Associated hackathon or event
+        required: true
+    },
+    skillSet: {
+        type: [String], // Array of skills
+        required: true
+    }
+}, {
+    timestamps: true
+});
 
-module.exports = Team;
+// SkillHunt Schema for Find a SkillHunt
+const skillHuntSchema = new mongoose.Schema({
+    hackathonName: {
+        type: String,
+        required: true
+    },  
+    teamName: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String, // Email of the user searching
+        required: true
+    }
+}, {
+    timestamps: true
+});
+
+const Team = mongoose.model("Team", teamSchema);
+const Member = mongoose.model("Member", memberSchema);
+const SkillHunt = mongoose.model("SkillHunt", skillHuntSchema);
+
+module.exports = {
+    Team,
+    Member,
+    SkillHunt
+};
