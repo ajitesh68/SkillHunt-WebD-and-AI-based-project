@@ -129,6 +129,8 @@ const TeamManagement = () => {
     setFindMembersFormData({ username: "", hackathon: "", skillSet: "" });
   };
 
+
+
   const boxStyle = {
     width: "350px",
     padding: "2rem",
@@ -166,6 +168,7 @@ const TeamManagement = () => {
   return (
     <div
       style={{
+        paddingTop: "60px",
         fontFamily: "'Poppins', sans-serif",
         background: "linear-gradient(135deg, #6A0DAD, #8A2BE2)",
         minHeight: "100vh",

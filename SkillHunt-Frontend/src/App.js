@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
+import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
@@ -15,6 +15,7 @@ import "./App.css";
 function App() {
   return (
     <Router>
+      <Navbar />
       <Routes>
         {/* Individual Routes for all pages */}
         <Route path="/" element={<HomePage />} />
