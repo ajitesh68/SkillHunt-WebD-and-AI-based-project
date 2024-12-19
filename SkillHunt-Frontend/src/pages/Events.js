@@ -87,28 +87,66 @@ const EventsPage = () => {
         Upcoming Events
       </h1>
 
-      {/* Carousel Section */}
-      <div id="eventCarousel" className="carousel slide mb-4" data-bs-ride="carousel">
-        <div className="carousel-inner" style={{ height: '300px' }}>
-          <div className="carousel-item active">
-            <img src="events1.jpeg" className="d-block w-100" alt="Event 1" style={{ objectFit: 'cover', height: '100%' }} />
-          </div>
-          <div className="carousel-item">
-            <img src="events2.jpeg" className="d-block w-100" alt="Event 2" style={{ objectFit: 'cover', height: '100%' }} />
-          </div>
-          <div className="carousel-item">
-            <img src="events3.webp" className="d-block w-100" alt="Event 3" style={{ objectFit: 'cover', height: '100%' }} />
-          </div>
-        </div>
-        <button className="carousel-control-prev" type="button" data-bs-target="#eventCarousel" data-bs-slide="prev">
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Previous</span>
-        </button>
-        <button className="carousel-control-next" type="button" data-bs-target="#eventCarousel" data-bs-slide="next">
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Next</span>
-        </button>
-      </div>
+    {/* Carousel Section */}
+<div id="eventCarousel" className="carousel slide mb-4" data-bs-ride="carousel">
+  <div className="carousel-inner" style={{ height: '300px' }}>
+    <div
+      className="carousel-item active"
+      style={{ cursor: 'pointer' }}
+      onClick={() => window.open('https://www.sih.gov.in/', '_blank')}
+    >
+      <img
+        src="events1.jpeg"
+        className="d-block w-100"
+        alt="Event 1"
+        style={{ objectFit: 'cover', height: '100%' }}
+      />
+    </div>
+    <div
+      className="carousel-item"
+      style={{ cursor: 'pointer' }}
+      onClick={() => window.open('https://www.hackerearth.com/challenges/', '_blank')}
+    >
+      <img
+        src="events2.jpeg"
+        className="d-block w-100"
+        alt="Event 2"
+        style={{ objectFit: 'cover', height: '100%' }}
+      />
+    </div>
+    <div
+      className="carousel-item"
+      style={{ cursor: 'pointer' }}
+      onClick={() => window.open('https://machinehack.com/hackathons/', '_blank')}
+    >
+      <img
+        src="events3.webp"
+        className="d-block w-100"
+        alt="Event 3"
+        style={{ objectFit: 'cover', height: '100%' }}
+      />
+    </div>
+  </div>
+  <button
+    className="carousel-control-prev"
+    type="button"
+    data-bs-target="#eventCarousel"
+    data-bs-slide="prev"
+  >
+    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span className="visually-hidden">Previous</span>
+  </button>
+  <button
+    className="carousel-control-next"
+    type="button"
+    data-bs-target="#eventCarousel"
+    data-bs-slide="next"
+  >
+    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+    <span className="visually-hidden">Next</span>
+  </button>
+</div>
+
 
       {/* Filters Section */}
       <div className="d-flex justify-content-around align-items-center flex-wrap mb-4" style={{ gap: '15px' }}>
