@@ -1,4 +1,3 @@
-// routes/teamRouter.js
 const express = require('express');
 const { Team, Member, SkillHunt } = require('../models/team'); // Import Models
 
@@ -8,11 +7,83 @@ const router = express.Router();
 router.post('/create', async (req, res) => {
   try {
     // Destructure request body
-    const { name, description, leader, event_id, members } = req.body;
+    const { teamName, description, leader, event_id, members } = req.body;
 
     // Create a new team document
     const newTeam = new Team({
-      name,
+      teamName,
+      description,
+      leader,
+      event_id,
+      members,
+    });
+
+    // Save the team to MongoDB
+    const savedTeam = await newTeam.save();
+    console.log("Saved team:", savedTeam); // Add this line to check if saving is successful
+
+    // Respond with the saved team
+    res.status(201).json({
+      message: "Team created successfully!",
+      team: savedTeam,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to create the team", error });
+  }
+});
+
+// Find a team based on hackathonName in SkillHunt
+router.post('/find', async (req, res) => {
+    const { hackathonName } = req.body;
+
+    try {
+        const teams = await Team.find({ event_id: hackathonName });
+        res.status(200).json({ message: 'Teams fetched successfully!', teams });
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to fetch teams', error: error.message });
+    }
+});
+
+// Find members based on username, hackathon, and skillset
+router.post('/find-members', async (req, res) => {
+    const { username, hackathon, skillSet } = req.body;
+
+    try {
+        const newMemberSearch = new Member({
+            username,
+            hackathon,
+            skillSet
+        });
+
+        await newMemberSearch.save();
+        res.status(200).json({ message: 'Member search submitted successfully!' });
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to submit member search', error: error.message });
+    }
+});
+
+module.exports = router;
+
+
+
+
+
+/*// routes/teamRouter.js
+const express = require('express');
+const { Team, Member, SkillHunt } = require('../models/team'); // Import Models
+
+const router = express.Router();
+
+// Create a team
+router.post('/create', async (req, res) => {
+  try {
+    // Destructure request body
+    const { teamName, description, leader, event_id, members } = req.body;
+
+    // Create a new team document
+    const newTeam = new Team({
+      teamName,
       description,
       leader,
       event_id,
@@ -70,4 +141,4 @@ router.post('/find-members', async (req, res) => {
     }
 });
 
-module.exports = router;
+module.exports = router;*/
