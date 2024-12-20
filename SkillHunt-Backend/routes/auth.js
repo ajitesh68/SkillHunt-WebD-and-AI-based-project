@@ -37,6 +37,7 @@ router.post("/signup", async (req, res) => {
 
     res.status(201).json({
       message: "User signed up successfully!",
+      user:user,
       userId: user._id, // Send the MongoDB `_id` in the response
     });
   } catch (error) {
@@ -69,7 +70,8 @@ router.post("/signin", async (req, res) => {
     res.status(200).json({
       message: "Login successful!",
       token,
-      user: { name: user.name, email: user.email },
+      // user: { name: user.name, email: user.email },
+      user,
     });
   } catch (error) {
     console.error(error);
@@ -101,7 +103,7 @@ router.post("/login", async (req, res) => {
     }
 
     const token = jwt.sign({ id: user._id }, "secretkey", { expiresIn: "1h" });
-    res.status(200).json({ success: true, token, message: "Login successful" });
+    res.status(200).json({ success: true, token, message: "Login successful", user });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error.message });

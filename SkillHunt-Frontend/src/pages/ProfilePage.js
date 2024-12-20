@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const ProfilePage = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  
+  console.log(user);
+  console.log(user.email);
+
   return (
     <div
       className="vh-100 d-flex flex-column"
@@ -38,8 +43,8 @@ const ProfilePage = () => {
                       border: "5px solid #e63946",
                     }}
                   />
-                  <h4 className="fw-bold">John Doe</h4>
-                  <p className="text-muted">@johndoe</p>
+                  <h4 className="fw-bold">{user.name}</h4>
+                  <p className="text-muted">{user.email}</p>
                   <p className="small">
                     Passionate developer with a love for web development and
                     team building.

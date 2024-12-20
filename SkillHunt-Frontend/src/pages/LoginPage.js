@@ -26,6 +26,11 @@ const LoginPage = () => {
       if (response.data.token) {
         alert(response.data.message);
         localStorage.setItem("token", response.data.token); // Save token to localStorage
+        // console.log("response data", response.data);
+        // console.log("reaponse ", response);
+        // localStorage.setItem("user", response.data.user);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+
         navigate("/profile"); // Redirect to ProfilePage after successful login
       } else {
         setError(response.data.message || "Login failed");
